@@ -59,5 +59,14 @@ router.post('/addnewappointment', function (req, res) {
     res.send('succes!')
 })
 
+setInterval(function () {
+    let today = moment().format('L')
+    Business.find({}).exec(function (err, res) {
+        Object.keys(res[0].availableAppointments)[0] != today ? console.log(1) : console.log(2)
+    })
+},
+    3000)
+
+
 
 module.exports = router
