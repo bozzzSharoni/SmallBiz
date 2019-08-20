@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import SingUp from './component/SingUp';
+import Home from './component/Home';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-
+// SingUp : true
     }
   }
   render() {
@@ -17,15 +19,15 @@ class App extends Component {
           <div class="nav-wrapper navBar #212121 grey darken-4">
             <a href="" class="brand-logo right">smallBiz</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-              <li ><Link to="/singup">singup  </Link></li>
+              {/* <li ><Link to="/SingUp">singup  </Link></li> */}
               <li ><Link to="/Home" >Home  </Link></li>
               <li ><Link to="/About">About </Link></li>
             </ul>
           </div>
         </nav>
 
-        {/* <Route path="/singup" render={() => this.state.users ? <LogUp /> : null} /> */}
-        {/* <Route path="/actions" render={() => <Actions CreateNewClient={this.CreateNewClient} data={this.state.data} />} /> */}
+        {/* <Route path="/" render={() => this.state.SingUp ? <SingUp /> : null} /> */}
+        <Route path="/Home" render={() =>  this.state.SingUp ? <Home  /> : null } />
         {/* <Route path="/analytics" render={() => <Analytics data={this.state.data} />} /> */}
         {/* <Route path="/Moveis/:id" exact render={() => <Catalog movies={this.state.movies} isRented={this.isRented} />} />  */}
 
