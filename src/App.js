@@ -11,6 +11,7 @@ import Filter from './component/Filter';
 import Bessiness from './component/Bessiness';
 import OpenBisnnes from './component/OpenBisnnes';
 import User from './component/User'
+import { async } from 'q';
 
 
 class App extends Component {
@@ -18,13 +19,29 @@ class App extends Component {
     super()
     this.state = {
       Catgories: ["BarberShop", "Cosmetics", "Food", "cars"],
-      name:'',
-      phone:'',
-      gender:'male',
-      city:'',
+      name: '',
+      phone: '',
+      gender: 'male',
+      city: '',
       email: '',
       password: '',
       user: {}
+    }
+  }
+
+  saveNewUserToDb = async () => {
+    let saveStatus = await axios.post('http://localhost:8000/addnewuser', {
+      name: this.state.name,
+      password: this.state.password,
+      phone: this.state.phone,
+      email: this.state.email,
+      gender: this.state.gender,
+      city: this.state.city
+    })
+    if (saveStatus.data == 'succes!') {
+      alert('signed up successfully')
+    } else {
+      alert('there was a problem with the sign up, please try again')
     }
   }
 
@@ -73,7 +90,7 @@ class App extends Component {
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
-        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} state={this.state} />} />
+        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} />} />
         <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
 
       </Router>

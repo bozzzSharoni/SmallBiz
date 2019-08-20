@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     phone: String,
     email: String,
     gender: String,
-    points: Number,
+    points: { type: Number, default: 5 },
     city: String,
     appointments: [],
 })
