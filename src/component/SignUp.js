@@ -48,7 +48,8 @@ class SignUp extends Component {
         <div>
           <label>Password</label>
           <input placeholder='Password' value={this.props.state.password} onChange={this.props.handle} type='password' name='password' />
-          <button onClick={this.signup} className='btn btn-success'> <Link to="/" >Sign up</Link></button>
+
+         <button onClick={this.signup} className='btn btn-success'>Signup</button>
         </div>
       </div>
     </div>

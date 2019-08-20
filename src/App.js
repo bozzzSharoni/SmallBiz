@@ -94,6 +94,7 @@ class App extends Component {
         <Route path="/" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} getName={this.getName} />} />
         <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} />} />
         <Route path="/About" render={() => <About />} />
+
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />

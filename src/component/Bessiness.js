@@ -6,7 +6,10 @@ class Bessiness extends Component {
   }
 
   render() {
-    return <div>Hello, (user name...) it my </div>
+
+    return <div>Hello, (user name...) it my {this.props.name}
+      
+    </div>
   }
 
 }
