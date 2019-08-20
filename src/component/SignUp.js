@@ -5,7 +5,7 @@ class SignUp extends Component {
   constructor() {
     super()
     this.state = {
-      
+
     }
 
   }
@@ -14,30 +14,39 @@ class SignUp extends Component {
 
   signup = (e) => {
     e.preventDefault()
-    firebase.auth().createUserWithEmailAndPassword(this.props.email, this.props.password).catch((error) => {
+    firebase.auth().createUserWithEmailAndPassword(this.props.state.email, this.props.state.password).catch((error) => {
       console.log(error)
     })
   }
 
-  
+
   render() {
     return <div className='col-md-6'>
       <div>
         <div>
-          <label>First Name</label>
-          <input placeholder='First Name' type='text'/>
-          <label>Last Name</label>
-          <input placeholder='Last Name' type='text'/>
-          <label>Date of Birth</label>
-          <input placeholder='Birthday' type='date'/>
+          <label>Full Name</label>
+          <input placeholder='Full Name' value={this.props.state.name} onChange={this.props.handle} type='text' name='name' />
+          <label>Phone</label>
+          <input placeholder='Phone' value={this.props.state.phone} onChange={this.props.handle} type='text' name='phone' />
+
+          <div>
+            <label>Gender</label>
+            <select className="browser-default col s2" onChange={this.props.handle} name='gender'>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+              <option value='other'>Other</option>
+            </select>
+          </div>
+          <label>City</label>
+          <input placeholder='City' value={this.props.state.city} onChange={this.props.handle} type='text' name='city' />
           <label>Email Address</label>
-          <input placeholder='Enter email' value={this.props.email} onChange={this.props.handle} type='email' name='email' />
+          <input placeholder='Enter email' value={this.props.state.email} onChange={this.props.handle} type='email' name='email' />
           <small className='form-text text-muted'>We`ll Never Share Your Email With Anyone Else</small>
         </div>
         <div>
           <label>Password</label>
-          <input placeholder='Password' value={this.props.password} onChange={this.props.handle} type='password' name='password' />
-          <button onClick={this.signup} className='btn btn-success'><Link to="/" >Sign up</Link></button>
+          <input placeholder='Password' value={this.props.state.password} onChange={this.props.handle} type='password' name='password' />
+          <Link to="/" ><button onClick={this.signup} className='btn btn-success'>Sign up</button></Link>
         </div>
       </div>
     </div>
