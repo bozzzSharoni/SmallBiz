@@ -1,31 +1,148 @@
 import React, { Component } from 'react';
+// import Checkbox from 'react-materialize/lib/Checkbox';
+// import Select from 'react-materialize/lib/Checkbox';
+
+
 
 class OpenBisnnes extends Component {
     constructor() {
         super()
         this.state = {
-            newBusines: {},
-            stringInput: ["name", "email", "password", "description", "img", "owner", "payment", "country", "city", "address", "field", "service",],
-            numbersInput: ["price", "averageAppointmentTime", "rating", "startTimeTillBrake", "brakeStartTime", "breakEndTime", "endTime"]
+            newBusines: { days: {} },
+            stringInput: ["name", "email", "password", "description", "img", "owner", "payment", "country", "city", "address", "service"],
+            numbersInput: ["price", "averageAppointmentTime"],
+            daysList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            hoursList: ['0000',
+                '0015',
+                '0030',
+                '0045',
+                '0100',
+                '0115',
+                '0130',
+                '0145',
+                '0200',
+                '0215',
+                '0230',
+                '0245',
+                '0300',
+                '0315',
+                '0330',
+                '0345',
+                '0400',
+                '0415',
+                '0430',
+                '0445',
+                '0500',
+                '0515',
+                '0530',
+                '0545',
+                '0600',
+                '0615',
+                '0630',
+                '0645',
+                '0700',
+                '0715',
+                '0730',
+                '0745',
+                '0800',
+                '0815',
+                '0830',
+                '0845',
+                '0900',
+                '0915',
+                '0930',
+                '0945',
+                '1000',
+                '1015',
+                '1030',
+                '1045',
+                '1100',
+                '1115',
+                '1130',
+                '1145',
+                '1200',
+                '1215',
+                '1230',
+                '1245',
+                '1300',
+                '1315',
+                '1330',
+                '1345',
+                '1400',
+                '1415',
+                '1430',
+                '1445',
+                '1500',
+                '1515',
+                '1530',
+                '1545',
+                '1600',
+                '1615',
+                '1630',
+                '1645',
+                '1700',
+                '1715',
+                '1730',
+                '1745',
+                '1800',
+                '1815',
+                '1830',
+                '1845',
+                '1900',
+                '1915',
+                '1930',
+                '1945',
+                '2000',
+                '2015',
+                '2030',
+                '2045',
+                '2100',
+                '2115',
+                '2130',
+                '2145',
+                '2200',
+                '2215',
+                '2230',
+                '2245',
+                '2300',
+                '2315',
+                '2330',
+                '2345'],
+            BesniessSetupHours: ["startTimeTillBrake", "brakeStartTime", "breakEndTime", "endTime"],
+            Catgories: ["BarberShop", "Cosmetics", "Food", "cars"],
+
         }
 
     }
     updeBesniiesText = (e) => {
+        let id = e.target.id
         let name = e.target.name
         let text = e.target.value
-        // this.state[name] = 0
+        if (id === 'hores') {
+            if (text[2] + text[3] !== "00") {
+                let min = parseInt(text[2] + text[3]) / 100
+                text = text.slice(0, 2)
+                text = parseInt(text)
+                text = text + min
+                console.log(text)
+            } else {
+                text = text.slice(0, 2)
+                text = parseInt(text)
+            }
+
+        }
         let newBusines = { ...this.state.newBusines }
         newBusines[name] = text
         this.setState({
             newBusines: newBusines
-        }, function () {
-            // console.log(this.state,this.state.userToUpdate)
         })
     }
 
     createNewBussnies = () => {
-        let length = this.state.stringInput.length + this.state.numbersInput.length
-
+        console.log(this.state.newBusines)
+        let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + 3
+        console.log(length)
+        console.log(Object.keys(this.state.newBusines).length)
         if (Object.keys(this.state.newBusines).length === length) {
             let allFieldAreFull = true
             for (let i in this.state.newBusines) {
@@ -41,11 +158,40 @@ class OpenBisnnes extends Component {
     clearInputs = () => {
         alert("work and need to open new busnies")
         this.state.newBusines = {}
+
+    }
+
+    appointmentComfirm = (e) => {
+        // let days = "days"
+        let name = e.target.name
+        let text = e.target.value
+        let checked = e.target.checked
+        // this.state[name] = 0
+        console.log(name, text)
+        let newBusines = { ...this.state.newBusines }
+        if (name === "appointmentComfirm") {
+            newBusines[name] = !this.state.newBusines[name]
+            // console.log(typeof text)
+            this.setState({
+                newBusines: newBusines
+            })
+        }
+        newBusines.days[name] = !this.state.newBusines.days[name]
+        // console.log(typeof text)
+        this.setState({
+            newBusines: newBusines
+        }
+            // , function () { console.log(this.state.newBusines[name]) }
+        )
     }
 
     render() {
+        let Catgories = this.state.Catgories
         let stringInput = this.state.stringInput
         let numbersInput = this.state.numbersInput
+        let daysList = this.state.daysList
+        let BesniessSetupHours = this.state.BesniessSetupHours
+        let hoursList = this.state.hoursList
         return <div>Helle this is where you are gonna put your besniess data and wait for us to confferm your request
               <h5> Add New Besniess </h5>
 
@@ -53,7 +199,39 @@ class OpenBisnnes extends Component {
             <h5>numbers</h5>
             {numbersInput.map(i => <label>{i} <input name={`${i}`} type="number" value={this.state.newBusines[i]} onChange={this.updeBesniiesText} placeholder={`${i}`} /> </label>)}
 
-            <button onClick={this.createNewBussnies}>Add New User <i class="material-icons right">send</i> </button> </div>
+            <form action="#">
+                <label>
+                    <input name="appointmentComfirm" type="checkbox" value={false} onChange={this.appointmentComfirm} />
+                    <span>appointmentComfirm </span>
+                </label>
+            </form>
+            <h5> day you are working </h5>
+            {daysList.map(d => <label> {d}
+                <input name={d} type="checkbox" value={true} onChange={this.appointmentComfirm} indeterminate />
+                {/* <input name={d} type="checkbox" value={true} onChange={this.appointmentComfirm} /> */}
+                <span></span>
+            </label>)}
+            <h5> select work hours </h5>
+
+            <label>Browser Select</label>
+            <select class="browser-default" name="field" onChange={this.updeBesniiesText}>
+                <option value="" disabled selected>Choose your Catgory</option>
+                {Catgories.map(c => <option value={c}> {c}</option>)}
+            </select>
+
+
+            {BesniessSetupHours.map(b =>
+                <label>{b}
+                    <select id="hores" class="browser-default" name={b} onChange={this.updeBesniiesText}>
+                        <option disabled selected>Choose your {b}</option>
+                        {hoursList.map(h => <option value={h}> {h}</option>)}
+                    </select> </label>
+            )}
+
+            <br></br>
+            <button onClick={this.createNewBussnies}>Add New User <i class="material-icons right">send</i> </button>
+
+        </div>
     }
 }
 
