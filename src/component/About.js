@@ -11,7 +11,7 @@ class About extends Component {
   render() {
 
     return <div>About Us about our policy and how to get singUp and how to make your own besniess page
-         <li ><Link to="/"> sing Up </Link></li>
+         <li ><Link to="/Signup"> sing Up </Link></li>
          <li ><Link to="/OpenBisnnes"> Open your Bessnies Page </Link></li>
     </div>
 
