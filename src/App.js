@@ -86,7 +86,7 @@ class App extends Component {
 
         <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} />} />
 
-        <Route path="/About" render={() => <About />} />
+        <Route path="/About" render={() => <About state={this.state}/>} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
