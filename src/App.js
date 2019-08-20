@@ -46,6 +46,15 @@ class App extends Component {
     }
   }
 
+  saveNewBiz = async (object) => {
+    let save = await axios.post('http://localhost:8000/addnewbusiness', object)
+    if (save.data == 'success!') {
+      alert('signed up successfully')
+    } else{
+      alert('there was a problem with the sign up, please try again')
+    }
+  }
+
   getName = async () => {
     let response = await axios.get(`http://localhost:8000/getuser/${this.state.email}`)
     console.log(response.data)
@@ -93,13 +102,13 @@ class App extends Component {
         </div>
         <Route path="/" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} getName={this.getName} />} />
         <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} />} />
-        <Route path="/About" render={() => <About />} />
+        <Route path="/About" render={() => <About state={this.state} />} />
 
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
-        <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
+        <Route path="/OpenBisnnes" render={() => <OpenBisnnes saveNew={this.saveNewBiz}/>} />
 
       </Router >
 
