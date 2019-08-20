@@ -62,7 +62,7 @@ class App extends Component {
         <div>
           {/* {this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp />} */}
         </div>
-        <Route path="/" exact render={() => this.state.user ?  <Home Catgories={this.state.Catgories}/> : <SignUp />} />
+        <Route path="/" exact render={() => this.state.user ?  <Home Catgories={this.state.Catgories}/> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password}/>} />
 
         <Route path="/Home" render={() => <Home  Catgories={this.state.Catgories}/>} />
 
