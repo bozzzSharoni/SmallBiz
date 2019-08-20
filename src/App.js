@@ -10,13 +10,14 @@ import Catgoty from './component/Catgoty';
 import Filter from './component/Filter';
 import Bessiness from './component/Bessiness';
 import OpenBisnnes from './component/OpenBisnnes';
+import User from './component/User'
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      Catgories: ["BarberShop", "Cosmetics", "Food","cars"],
+      Catgories: ["BarberShop", "Cosmetics", "Food", "cars"],
       email: '',
       password: '',
       user: {}
@@ -62,15 +63,15 @@ class App extends Component {
         <div>
           {/* {this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp />} */}
         </div>
-        <Route path="/" exact render={() => this.state.user ?  <Home Catgories={this.state.Catgories}/> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password}/>} />
+        <Route path="/" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} />} />
 
-        <Route path="/Home" render={() => <Home  Catgories={this.state.Catgories}/>} />
+        <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} />} />
 
         <Route path="/About" render={() => <About />} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
-
+        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password} />} />
         <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
 
       </Router>
