@@ -21,7 +21,7 @@ class Login extends Component {
                 <div>
                     <label>Email Address</label>
                     <input placeholder='Enter email' value={this.props.email} onChange={this.props.handle} type='email' name='email' />
-                    <small className='form-text text-muted'>We`ll Never Share Your Email With Anyone Else</small>
+                   
                 </div>
                 <div>
                     <label>Password</label>

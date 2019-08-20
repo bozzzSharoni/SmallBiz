@@ -24,6 +24,12 @@ class SignUp extends Component {
     return <div className='col-md-6'>
       <div>
         <div>
+          <label>First Name</label>
+          <input placeholder='First Name' type='text'/>
+          <label>Last Name</label>
+          <input placeholder='Last Name' type='text'/>
+          <label>Date of Birth</label>
+          <input placeholder='Birthday' type='date'/>
           <label>Email Address</label>
           <input placeholder='Enter email' value={this.props.email} onChange={this.props.handle} type='email' name='email' />
           <small className='form-text text-muted'>We`ll Never Share Your Email With Anyone Else</small>
