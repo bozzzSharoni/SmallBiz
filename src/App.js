@@ -9,15 +9,17 @@ import About from './component/About';
 import Catgoty from './component/Catgoty';
 import Filter from './component/Filter';
 import Bessiness from './component/Bessiness';
+import OpenBisnnes from './component/OpenBisnnes';
+
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
+      Catgories: ["BarberShop", "Cosmetics", "Food","cars"],
       email: '',
       password: '',
-      user: {},
-      Catgoriec: ["BarberShop", "Cosmetics", "Food"]
+      user: {}
     }
   }
 
@@ -47,7 +49,8 @@ class App extends Component {
 
           <div class="nav-wrapper navBar #212121 grey darken-4">
 
-            <a href="" class="brand-logo right">smallBiz</a>
+
+            <a href="/About" class="brand-logo right"> smallBiz</a> {/* also a link but in html syntax */}
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               {/* <li ><Link to="/SingUp">singup  </Link></li> */}
               <li ><Link to="/" >Home</Link></li>
@@ -56,24 +59,22 @@ class App extends Component {
           </div>
         </nav>
 
+        <div>
+          {/* {this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp />} */}
+        </div>
+        <Route path="/" exact render={() => this.state.user ?  <Home Catgories={this.state.Catgories}/> : <SignUp />} />
 
-        <Route path="/" exact render={() => this.state.user ? <Home Catgoriec={this.state.Catgoriec} /> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password}/>} />
-        {/* <Route path="/analytics" render={() => <Analytics data={this.state.data} />} /> */}
-        {/* <Route path="/" render={() => this.state.SingUp ? <SingUp /> : null} /> */}
-        <Route path="/Home" render={() => <Home Catgoriec={this.state.Catgoriec} />} />
+        <Route path="/Home" render={() => <Home  Catgories={this.state.Catgories}/>} />
+
         <Route path="/About" render={() => <About />} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
 
+        <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
 
-        {/* <Route path="/Moveis/:id" exact render={() => <Catalog movies={this.state.movies} isRented={this.isRented} />} />  */}
+      </Router>
 
-        {/* <Route path="/Catalog/:id" exact render={({ match }) => (this.state[match.params.id] ? (<Catalog match={match} state={this.state} />) : (<Landing />))} /> */}
-        {/* <a onClick={this.isRented}> sfhfjdnkbjdsnfkbjndsfk</a> */}
-
-        {/* <Route /> */}
-      </Router >
     );
   }
 }
