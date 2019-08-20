@@ -19,15 +19,16 @@ router.post('/addnewuser', function (req, res) {
 router.post('/addnewbusiness', async function (req, res) {
     let b1 = new Business(req.body)
     let dailySchedule = await getDailySchedule(req.body)
-    b1.availableAppointments = {
-        [moment().format('L')]: dailySchedule,
-        [moment().add(1, 'day').format('L')]: dailySchedule,
-        [moment().add(2, 'day').format('L')]: dailySchedule,
-        [moment().add(3, 'day').format('L')]: dailySchedule,
-        [moment().add(4, 'day').format('L')]: dailySchedule,
-        [moment().add(5, 'day').format('L')]: dailySchedule,
-        [moment().add(6, 'day').format('L')]: dailySchedule
-    }
+    b1.availableAppointments = [
+        { regularDay: dailySchedule },
+        { [moment().format('L')]: dailySchedule },
+        { [moment().add(1, 'day').format('L')]: dailySchedule },
+        { [moment().add(2, 'day').format('L')]: dailySchedule },
+        { [moment().add(3, 'day').format('L')]: dailySchedule },
+        { [moment().add(4, 'day').format('L')]: dailySchedule },
+        { [moment().add(5, 'day').format('L')]: dailySchedule },
+        { [moment().add(6, 'day').format('L')]: dailySchedule }
+    ]
     b1.save()
     res.send('succes!')
 })
@@ -62,7 +63,15 @@ router.post('/addnewappointment', function (req, res) {
 setInterval(function () {
     let today = moment().format('L')
     Business.find({}).exec(function (err, res) {
-        Object.keys(res[0].availableAppointments)[0] != today ? console.log(1) : console.log(2)
+        Object.keys(res[0].availableAppointments[1])[0] == today ?
+            null :
+            Business.find({}).exec(function (err, res) {
+                for (let i of res) {
+                    i.availableAppointments.push = { [today]: Object.values(res[0].availableAppointments[0].regularDay) }
+                    i.availableAppointments.splice(1, 1)
+                }
+                res.save()
+            })
     })
 },
     3000)

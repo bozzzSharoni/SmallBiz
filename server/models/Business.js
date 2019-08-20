@@ -26,7 +26,7 @@ const BusinessSchema = new Schema({
     brakeStartTime: Number,
     breakEndTime: Number,
     endTime: Number,
-    availableAppointments: { type: Object, default: { key: "value" } },
+    availableAppointments: { type: Array, default: [{ key: "value" }] },
 })
 
 const Business = mongoose.model("Business", BusinessSchema)
