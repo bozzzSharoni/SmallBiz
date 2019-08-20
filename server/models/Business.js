@@ -9,7 +9,7 @@ const BusinessSchema = new Schema({
     img: String,
     owner: String,
     // payment: String,
-    // appointmentComfirm: Boolean,
+    appointmentComfirm: Boolean,
     country: String,
     city: String,
     address: String,
