@@ -18,17 +18,17 @@ router.post('/addnewuser', function (req, res) {
 
 router.post('/addnewbusiness', async function (req, res) {
     let b1 = new Business(req.body)
-    let dailySchedule = await getDailySchedule(req.body)
-    b1.availableAppointments = [
-        { regularDay: dailySchedule },
-        { [moment().format('L')]: dailySchedule },
-        { [moment().add(1, 'day').format('L')]: dailySchedule },
-        { [moment().add(2, 'day').format('L')]: dailySchedule },
-        { [moment().add(3, 'day').format('L')]: dailySchedule },
-        { [moment().add(4, 'day').format('L')]: dailySchedule },
-        { [moment().add(5, 'day').format('L')]: dailySchedule },
-        { [moment().add(6, 'day').format('L')]: dailySchedule }
-    ]
+    // let dailySchedule = await getDailySchedule(req.body)
+    // b1.availableAppointments = [
+    //     { regularDay: dailySchedule },
+    //     { [moment().format('L')]: dailySchedule },
+    //     { [moment().add(1, 'day').format('L')]: dailySchedule },
+    //     { [moment().add(2, 'day').format('L')]: dailySchedule },
+    //     { [moment().add(3, 'day').format('L')]: dailySchedule },
+    //     { [moment().add(4, 'day').format('L')]: dailySchedule },
+    //     { [moment().add(5, 'day').format('L')]: dailySchedule },
+    //     { [moment().add(6, 'day').format('L')]: dailySchedule }
+    // ]
     b1.save()
     res.send('succes!')
 })
