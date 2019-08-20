@@ -9,9 +9,9 @@ class Home extends Component {
 
     render() {
         return <div> Home
-        {this.props.Catgoriec.map(c =>
+        {this.props.Catgories.map(c =>
             <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
-        )} }
+        )} 
         </div>
     }
 
