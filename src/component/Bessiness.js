@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
 class Bessiness extends Component {
-    constructor() {
-        super()
-
-    }
+  constructor() {
+    super()
+  }
 
   render() {
-    return <div>Hello, (user name...) it my {this.props.name}</div>
+    return <div>Hello, (user name...) it my </div>
   }
-    
+
 }
-    
+
 export default Bessiness;

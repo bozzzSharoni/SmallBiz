@@ -10,16 +10,17 @@ class Home extends Component {
 
     }
 
-  logout = () => {
-      firebase.auth().signOut()
-  }
+    logout = () => {
+        firebase.auth().signOut()
+    }
     render() {
         return <div> Home
       <button onClick={this.logout}>Logout</button>
-        {this.props.Catgories.map(c =>
-            <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
-        )} 
+            {this.props.Catgories.map(c =>
+                <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
+            )}
 
+            <h1>welcome back {this.props.name} !!!!</h1>
         </div>
     }
 

@@ -60,6 +60,13 @@ router.post('/addnewappointment', function (req, res) {
     res.send('succes!')
 })
 
+router.get('/getuser/:email', function (req, res) {
+    User.find({ email: req.params.email }).exec(function (err, users) {
+        console.log(users[0])
+        res.send(users[0])
+    })
+})
+
 setInterval(function () {
     let today = moment().format('L')
     Business.find({}).exec(function (err, res) {

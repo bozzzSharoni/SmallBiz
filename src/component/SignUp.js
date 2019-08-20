@@ -15,6 +15,7 @@ class SignUp extends Component {
   signup = (e) => {
     e.preventDefault()
     this.props.saveUser()
+    this.props.getName()
     firebase.auth().createUserWithEmailAndPassword(this.props.state.email, this.props.state.password).catch((error) => {
       console.log(error)
     })
@@ -47,7 +48,7 @@ class SignUp extends Component {
         <div>
           <label>Password</label>
           <input placeholder='Password' value={this.props.state.password} onChange={this.props.handle} type='password' name='password' />
-         <button onClick={this.signup} className='btn btn-success'> <Link to="/" >Sign up</Link></button>
+          <button onClick={this.signup} className='btn btn-success'> <Link to="/" >Sign up</Link></button>
         </div>
       </div>
     </div>

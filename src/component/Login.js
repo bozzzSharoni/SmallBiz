@@ -4,6 +4,7 @@ import firebase from '../config/firebase'
 class Login extends Component {
 
     login = (e) => {
+        this.props.getName()
         e.preventDefault()
         firebase.auth().signInWithEmailAndPassword(this.props.email, this.props.password).catch((error) => {
             console.log(error)
@@ -21,7 +22,7 @@ class Login extends Component {
                 <div>
                     <label>Email Address</label>
                     <input placeholder='Enter email' value={this.props.email} onChange={this.props.handle} type='email' name='email' />
-                   
+
                 </div>
                 <div>
                     <label>Password</label>
