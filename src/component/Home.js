@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class Home extends Component {
     constructor() {
@@ -6,10 +7,14 @@ class Home extends Component {
 
     }
 
-  render() {
-    return <div>Home</div>
-  }
-    
+    render() {
+        return <div> Home
+        {this.props.Catgoriec.map(c =>
+            <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
+        )} }
+        </div>
+    }
+
 }
-    
+
 export default Home;
