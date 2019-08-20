@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from '../config/firebase'
 // import Checkbox from 'react-materialize/lib/Checkbox';
 // import Select from 'react-materialize/lib/Checkbox';
 
@@ -114,6 +115,8 @@ class OpenBisnnes extends Component {
         }
 
     }
+
+
     updeBesniiesText = (e) => {
         let id = e.target.id
         let name = e.target.name
@@ -156,9 +159,12 @@ class OpenBisnnes extends Component {
         // ojj = {}
     }
     clearInputs = () => {
+        firebase.auth().createUserWithEmailAndPassword(this.state.newBusines.email, this.state.newBusines.password).catch((error) => {
+            console.log(error)
+        })
+        this.props.saveNew(this.state.newBusines)
         alert("work and need to open new busnies")
         this.state.newBusines = {}
-
     }
 
     appointmentComfirm = (e) => {
