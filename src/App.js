@@ -47,10 +47,7 @@ class App extends Component {
     return (
       <Router>
         <nav>
-
           <div class="nav-wrapper navBar #212121 grey darken-4">
-
-
             <a href="/About" class="brand-logo right"> smallBiz</a> {/* also a link but in html syntax */}
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               {/* <li ><Link to="/SingUp">singup  </Link></li> */}
