@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+
+    }
+  }
+  render() {
+    return (
+      <Router>
+        <nav>
+          <div class="nav-wrapper navBar #212121 grey darken-4">
+            <a href="" class="brand-logo right">smallBiz</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <li ><Link to="/singup">singup  </Link></li>
+              <li ><Link to="/Home" >Home  </Link></li>
+              <li ><Link to="/About">About </Link></li>
+            </ul>
+          </div>
+        </nav>
+
+        {/* <Route path="/singup" render={() => this.state.users ? <LogUp /> : null} /> */}
+        {/* <Route path="/actions" render={() => <Actions CreateNewClient={this.CreateNewClient} data={this.state.data} />} /> */}
+        {/* <Route path="/analytics" render={() => <Analytics data={this.state.data} />} /> */}
+        {/* <Route path="/Moveis/:id" exact render={() => <Catalog movies={this.state.movies} isRented={this.isRented} />} />  */}
+
+        {/* <Route path="/Catalog/:id" exact render={({ match }) => (this.state[match.params.id] ? (<Catalog match={match} state={this.state} />) : (<Landing />))} /> */}
+        {/* <a onClick={this.isRented}> sfhfjdnkbjdsnfkbjndsfk</a> */}
+
+        {/* <Route /> */}
+      </Router>
+    );
+  }
 }
 
 export default App;
