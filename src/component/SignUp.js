@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
-
+import firebase from '../config/firebase'
 class SignUp extends Component {
   constructor() {
     super()
     this.state = {
-      email: '',
-      password: ''
+      
     }
 
   }
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+
+  login = (e) => {
+    e.preventDefault()
+    firebase.auth().signInWithEmailAndPassword(this.props.email, this.props.password).catch((error) => {
+      console.log(error)
+    })
   }
+
+  signup = (e) => {
+    e.preventDefault()
+    firebase.auth().createUserWithEmailAndPassword(this.props.email, this.props.password).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  
   render() {
     return <div className='col-md-6'>
-      <form>
+      <div>
         <div>
-          <label for="InputEmail">Email Address</label>
-          <input id='InputEmail' placeholder='Enter email' value={this.state.email} onChange={this.handleChange} type='email' name='email' />
+          <label>Email Address</label>
+          <input placeholder='Enter email' value={this.props.email} onChange={this.props.handle} type='email' name='email' />
           <small className='form-text text-muted'>We`ll Never Share Your Email With Anyone Else</small>
         </div>
         <div>
-          <label for='InputPassword'>Password</label>
-          <input id='InputPassword' placeholder='Password' value={this.state.password} onChange={this.handleChange} type='password' name='password' />
-          <button type='submit' onClick={this.login} className='btn btn-primary'>Login</button>
+          <label>Password</label>
+          <input placeholder='Password' value={this.props.password} onChange={this.props.handle} type='password' name='password' />
+          <button onClick={this.login} className='btn btn-primary'>Login</button>
           <button onClick={this.signup} className='btn btn-success'>Signup</button>
         </div>
-      </form>
+      </div>
     </div>
   }
 
