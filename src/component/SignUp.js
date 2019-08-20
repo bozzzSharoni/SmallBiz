@@ -14,6 +14,7 @@ class SignUp extends Component {
 
   signup = (e) => {
     e.preventDefault()
+    
     firebase.auth().createUserWithEmailAndPassword(this.props.state.email, this.props.state.password).catch((error) => {
       console.log(error)
     })
