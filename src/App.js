@@ -25,7 +25,8 @@ class App extends Component {
       city: '',
       email: '',
       password: '',
-      user: {}
+      user: {},
+      loggedInUserName: '',
     }
   }
 
@@ -43,6 +44,14 @@ class App extends Component {
     } else {
       alert('there was a problem with the sign up, please try again')
     }
+  }
+
+  getName = async () => {
+    let response = await axios.get(`http://localhost:8000/getuser/${this.state.email}`)
+    console.log(response.data)
+    this.setState({ loggedInUserName: response.data.name }, function () {
+      console.log(this.state.loggedInUserName)
+    })
   }
 
   handleChange = (e) => {
@@ -82,18 +91,17 @@ class App extends Component {
         <div>
           {/* {this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp />} */}
         </div>
-        <Route path="/" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} />} />
+        <Route path="/" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} getName={this.getName} />} />
+        <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} />} />
+        <Route path="/About" render={() => <About />} />
 
-        <Route path="/Home" render={() => <Home Catgories={this.state.Catgories} />} />
-
-        <Route path="/About" render={() => <About state={this.state}/>} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
-        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} />} />
+        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
         <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
 
-      </Router>
+      </Router >
 
     );
   }
