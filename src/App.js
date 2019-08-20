@@ -18,6 +18,10 @@ class App extends Component {
     super()
     this.state = {
       Catgories: ["BarberShop", "Cosmetics", "Food", "cars"],
+      name:'',
+      phone:'',
+      gender:'male',
+      city:'',
       email: '',
       password: '',
       user: {}
@@ -44,6 +48,7 @@ class App extends Component {
     })
   }
   render() {
+    console.log(this.state)
     return (
       <Router>
         <nav>
@@ -68,7 +73,7 @@ class App extends Component {
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
-        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password} />} />
+        <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp handle={this.handleChange} state={this.state} />} />
         <Route path="/OpenBisnnes" render={() => <OpenBisnnes />} />
 
       </Router>

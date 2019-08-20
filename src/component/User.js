@@ -7,7 +7,6 @@ class User extends Component{
         return (
             <div>
             <Login handle={this.props.handle} email={this.props.email} password={this.props.password}/>
-            {/* <SignUp handle={this.props.handle} email={this.props.email} password={this.props.password}/> */}
             </div>
         )
     }
