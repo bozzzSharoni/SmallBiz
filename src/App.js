@@ -14,10 +14,17 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      email: '',
+      password: '',
       user: {},
       Catgoriec: ["BarberShop", "Cosmetics", "Food"]
     }
   }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   componentDidMount() {
     this.authListener()
   }
@@ -50,7 +57,7 @@ class App extends Component {
         </nav>
 
 
-        <Route path="/" exact render={() => this.state.user ? <Home Catgoriec={this.state.Catgoriec} /> : <SignUp />} />
+        <Route path="/" exact render={() => this.state.user ? <Home Catgoriec={this.state.Catgoriec} /> : <SignUp handle={this.handleChange} email={this.state.email} password={this.state.password}/>} />
         {/* <Route path="/analytics" render={() => <Analytics data={this.state.data} />} /> */}
         {/* <Route path="/" render={() => this.state.SingUp ? <SingUp /> : null} /> */}
         <Route path="/Home" render={() => <Home Catgoriec={this.state.Catgoriec} />} />
