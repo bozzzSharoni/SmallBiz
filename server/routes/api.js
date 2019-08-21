@@ -22,16 +22,17 @@ router.post('/addnewuser', function (req, res) {
 
 
 getCatgoties = async function () {
-// await Category.findOneAndDelete({}).exec(function (err,Category){
-//     console.log(Category[0])
-//     obj3 = {}
-// })
+    // await Category.findOneAndDelete({}).exec(function (err, Category) {
+    //     console.log(Category[0])
+    //     obj3 = {}
+    // })
+    Category.remove({})
     let obj = {
         Catgories: []
     }
     let obj1 = {}
     await Business.find({}).exec(function (err, businesses) {
-        businesses.forEach(b => obj1[b.field] = { name: b.field, img: b.img, description: "jhdskjkjhfk" })
+        businesses.forEach(b => obj1[b.field] = { name: b.field, img: b.img, description: b.description })
         // obj = JSON.stringify(obj)
         // console.log(obj1)
         for (let i in obj1) {
@@ -43,8 +44,6 @@ getCatgoties = async function () {
         console.log(obj)
         new Category(obj).save()
     })
-
-
     // console.log(obj)
 }
 

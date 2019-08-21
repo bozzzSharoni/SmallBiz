@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import firebase from '../config/firebase'
+import Maps from './Maps';
 
 
 class Home extends Component {
@@ -51,6 +52,7 @@ class Home extends Component {
         {/* )} */}
 
             <button onClick={this.logout}>Logout</button>
+            {/* <Maps /> */}
         </div>
     }
 
