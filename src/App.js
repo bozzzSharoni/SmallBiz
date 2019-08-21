@@ -18,7 +18,26 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      Catgories: ["Food", "Beauty", "Haircuts", "Cars", "Maintenance", "Medicine", "Travels", "Other"],
+
+      Catgories: [
+        {
+          name: "Beauty",
+          img: "https://media.self.com/photos/57e00e471db118765d302bdd/2:1/pass/sub-channel-beauty_makeup.jpg"
+        },
+        {
+          name: "Travels",
+          img: "https://africaslist.com/wp-content/uploads/tours.jpg"
+        },
+        {
+          name: "Maintenance",
+          img: "http://volcone.com/wp-content/uploads/2017/06/Website-maintenance.jpg"
+        },
+        {
+          name: "Haircuts",
+          img: "https://www.hair.com/-/media/project/loreal/brand-sites/salonsecret/americas/us/article-pictures/hard-part-haircut-header-new.jpg?w=350&hash=413CEB7D6780E3A7D7C7A76B8CAF9796074ABB9C"
+        }
+      ],
+
       name: '',
       phone: '',
       gender: 'male',
@@ -29,6 +48,24 @@ class App extends Component {
       // loggedInUserName: '',
     }
   }
+
+
+
+  async componentDidMount() {
+    this.authListener()
+    const res = await axios.get('http://localhost:8000/Catgories')
+    let Catgories = res.data[0].Catgories
+    // Catgories = Object.keys(Catgories)
+    console.log(Catgories)
+
+    this.setState({
+      Catgories: Catgories
+    })
+    console.log(this.state.Catgories)
+  }
+
+
+
 
   saveNewUserToDb = async () => {
     let saveStatus = await axios.post('http://localhost:8000/addnewuser', {
@@ -63,10 +100,6 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  componentDidMount() {
-    this.authListener()
-    
-  }
 
   authListener() {
     firebase.auth().onAuthStateChanged((user) => {
