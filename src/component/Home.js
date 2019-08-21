@@ -8,7 +8,7 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            loggedInUserName:''
+            loggedInUserName: ''
         }
     }
 
@@ -19,19 +19,19 @@ class Home extends Component {
     getName = async () => {
         let response = await axios.get(`http://localhost:8000/getuser/${this.props.email}`)
         this.setState({ loggedInUserName: response.data.name })
-      }
+    }
 
-    
+
 
     render() {
         this.getName()
         return <div> Home
             {this.props.Catgories.map(c =>
-                <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
-            )}
+            <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
+        )}
 
             <h1>welcome back {this.state.loggedInUserName} !!!!</h1>
-            <button onClick={this.signOut}>Logout</button>
+            <button onClick={this.logout}>Logout</button>
         </div>
     }
 
