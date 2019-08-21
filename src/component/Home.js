@@ -22,7 +22,6 @@ class Home extends Component {
     }
 
 
-    
     render() {
         this.getName()
         return <div> Home

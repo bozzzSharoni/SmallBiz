@@ -21,7 +21,6 @@ class SignUp extends Component {
     // this.props.getName()
   }
 
-
   render() {
     return <div className='col-md-6'>
       <div>
