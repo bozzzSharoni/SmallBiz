@@ -15,12 +15,13 @@ class Home extends Component {
     }
     render() {
         return <div> Home
-      <button onClick={this.logout}>Logout</button>
+            {this.props.getName}
             {this.props.Catgories.map(c =>
                 <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li>
             )}
 
             <h1>welcome back {this.props.name} !!!!</h1>
+            <button onClick={this.logout}>Logout</button>
         </div>
     }
 
