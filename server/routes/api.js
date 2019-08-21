@@ -5,6 +5,7 @@ const Business = require('../models/Business')
 const User = require('../models/User')
 const Appointment = require('../models/Appointment')
 const moment = require('moment')
+const Category = require('../models/CategorySchema')
 
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
@@ -15,6 +16,44 @@ router.post('/addnewuser', function (req, res) {
     u1.save()
     res.send('succes!')
 })
+
+
+
+
+
+// getCatgoties =  function () {
+
+//     let obj = {
+//         Catgories: {}
+//     }
+//     Business.find({}).exec(function (err, businesses) {
+//         businesses.forEach(b => obj.Catgories[b.field] = { name: b.field, img: "jhgjhbjhb" })
+//         obj = JSON.stringify(obj)
+//         console.log(obj)
+//         new Category(obj).save()
+//     })
+    
+//     // console.log(obj)
+// }
+
+
+// getCatgoties()
+
+
+router.get('/Catgories', function (req, res) {
+    Category.find({}).exec(function (err, Category) {
+        console.log(Category)
+        res.send(Category)
+    })
+})
+
+
+
+router.post('/addCatgories', function (req, res) {
+    new Category(req.body).save()
+    res.send('succes!')
+})
+
 
 router.post('/addnewbusiness', async function (req, res) {
     req.body.price = parseInt(req.body.price)
