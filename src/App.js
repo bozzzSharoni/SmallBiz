@@ -50,7 +50,7 @@ class App extends Component {
     let save = await axios.post('http://localhost:8000/addnewbusiness', object)
     if (save.data == 'success!') {
       alert('signed up successfully')
-    } else{
+    } else {
       alert('there was a problem with the sign up, please try again')
     }
   }
@@ -108,7 +108,7 @@ class App extends Component {
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
-        <Route path="/OpenBisnnes" render={() => <OpenBisnnes saveNew={this.saveNewBiz}/>} />
+        <Route path="/OpenBisnnes" render={() => <OpenBisnnes saveNew={this.saveNewBiz} />} />
 
       </Router >
 
