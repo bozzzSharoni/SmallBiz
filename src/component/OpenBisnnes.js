@@ -202,7 +202,7 @@ class OpenBisnnes extends Component {
             )}
 
             <br></br>
-            <button onClick={this.getGeoLocation}> do you want us to get your location for your busniines </button>
+            {/* <button onClick={this.getGeoLocation}> do you want us to get your location for your busniines </button> */}
             <button onClick={this.createNewBussnies}>Add New User <i class="material-icons right">send</i> </button>
 
         </div>
