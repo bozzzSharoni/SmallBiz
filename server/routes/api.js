@@ -32,7 +32,7 @@ router.post('/addnewuser', function (req, res) {
 //         console.log(obj)
 //         new Category(obj).save()
 //     })
-    
+
 //     // console.log(obj)
 // }
 
@@ -103,6 +103,21 @@ router.post('/addnewappointment', function (req, res) {
     let a1 = new Appointment(req.body)
     a1.save()
     res.send('succes!')
+})
+
+router.put('/makeapp/:id', function (req, res) {
+    let id = req.params.id
+    Business.findOne({ _id: id }).exec(function (err, buss) {
+        // let buss = {...buss}
+        let x = buss
+        let relevant = x.availableAppointments.find(a => a[req.body.date])
+        let index = relevant[req.body.date].indexOf(req.body.time)
+        x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
+        
+        console.log(x.availableAppointments)
+        x.save()
+        res.end()
+    })
 })
 
 router.get('/getuser/:email', function (req, res) {
