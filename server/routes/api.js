@@ -39,7 +39,7 @@ router.post('/addnewbusiness', async function (req, res) {
 })
 
 getDailySchedule = function (object) {
-    console.log(object)
+
     let dailySchedule = []
     counter = object.averageAppointmentTime
     let num1 = object.startTimeTillBrake * 60
@@ -68,10 +68,16 @@ router.post('/addnewappointment', function (req, res) {
 
 router.get('/getuser/:email', function (req, res) {
     User.find({ email: req.params.email }).exec(function (err, users) {
-        console.log(users[0])
         res.send(users[0])
     })
 })
+
+router.get('/getbyfield/:field', function (req, res) {
+    Business.find({ field: req.params.field }).exec(function (err, response) {
+        res.send(response)
+    })
+})
+
 
 // setInterval(function () {
 //     let today = moment().format('L')
