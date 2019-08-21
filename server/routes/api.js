@@ -21,6 +21,7 @@ router.post('/addnewuser', function (req, res) {
 
 
 
+
 getCatgoties = async function () {
     // await Category.findOneAndDelete({}).exec(function (err, Category) {
     //     console.log(Category[0])
@@ -46,6 +47,9 @@ getCatgoties = async function () {
     })
     // console.log(obj)
 }
+
+
+
 
 
 getCatgoties()
@@ -117,6 +121,21 @@ router.post('/addnewappointment', function (req, res) {
     res.send('succes!')
 })
 
+router.put('/makeapp/:id', function (req, res) {
+    let id = req.params.id
+    Business.findOne({ _id: id }).exec(function (err, buss) {
+        // let buss = {...buss}
+        let x = buss
+        let relevant = x.availableAppointments.find(a => a[req.body.date])
+        let index = relevant[req.body.date].indexOf(req.body.time)
+        x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
+        
+        console.log(x.availableAppointments)
+        x.save()
+        res.end()
+    })
+})
+
 router.get('/getuser/:email', function (req, res) {
     User.find({ email: req.params.email }).exec(function (err, users) {
         res.send(users[0])
@@ -125,6 +144,12 @@ router.get('/getuser/:email', function (req, res) {
 
 router.get('/getbyfield/:field', function (req, res) {
     Business.find({ field: req.params.field }).exec(function (err, response) {
+        res.send(response[0])
+    })
+})
+
+router.get('/getbyname/:name', function (req, res) {
+    Business.find({ name: req.params.name }).exec(function (err, response) {
         res.send(response)
     })
 })
