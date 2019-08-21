@@ -54,7 +54,7 @@ class OpenBisnnes extends Component {
         let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + 3
         console.log(length)
         console.log(Object.keys(this.state.newBusines).length)
-        if (Object.keys(this.state.newBusines).length === length) {
+        if (Object.keys(this.state.newBusines).length === length || Object.keys(this.state.newBusines).length === length - 1) {
             let allFieldAreFull = true
             for (let i in this.state.newBusines) {
                 console.log(this.state.newBusines[i])
