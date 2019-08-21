@@ -35,6 +35,10 @@ class App extends Component {
         {
           name: "Haircuts",
           img: "https://www.hair.com/-/media/project/loreal/brand-sites/salonsecret/americas/us/article-pictures/hard-part-haircut-header-new.jpg?w=350&hash=413CEB7D6780E3A7D7C7A76B8CAF9796074ABB9C"
+        },
+        {
+          name: "Cars",
+          img: "https://amp.businessinsider.com/images/592f4169b74af41b008b5977-750-563.jpg",
         }
       ],
 
@@ -49,23 +53,18 @@ class App extends Component {
     }
   }
 
-
-
   async componentDidMount() {
     this.authListener()
-    const res = await axios.get('http://localhost:8000/Catgories')
-    let Catgories = res.data[0].Catgories
-    // Catgories = Object.keys(Catgories)
-    console.log(Catgories)
+    // const res = await axios.get('http://localhost:8000/Catgories')
+    // let Catgories = res.data[0].Catgories
+    // // Catgories = Object.keys(Catgories)
+    // console.log(Catgories)
 
-    this.setState({
-      Catgories: Catgories
-    })
-    console.log(this.state.Catgories)
+    // this.setState({
+    //   Catgories: Catgories
+    // })
+    // console.log(this.state.Catgories)
   }
-
-
-
 
   saveNewUserToDb = async () => {
     let saveStatus = await axios.post('http://localhost:8000/addnewuser', {
@@ -140,7 +139,7 @@ class App extends Component {
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} email={this.state.user.email} getName={this.getName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
 
-        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home Catgories={this.state.Catgories} email={this.state.user.email} getName={this.getName}/> : <OpenBisnnes saveNew={this.saveNewBiz} />} />
+        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home Catgories={this.state.Catgories} email={this.state.user.email} getName={this.getName} /> : <OpenBisnnes saveNew={this.saveNewBiz} />} />
 
 
       </Router >
