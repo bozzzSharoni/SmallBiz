@@ -41,6 +41,7 @@ class App extends Component {
     })
     if (saveStatus.data == 'succes!') {
       alert('signed up successfully')
+      this.setState({ifBuisnuess : true })
     } else {
       alert('there was a problem with the sign up, please try again')
     }
@@ -108,7 +109,7 @@ class App extends Component {
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
-        <Route path="/OpenBisnnes" render={() => <OpenBisnnes saveNew={this.saveNewBiz} />} />
+        <Route path="/OpenBisnnes" render={() => this.state.ifBuisnuess ? <Home Catgories={this.state.Catgories} name={this.state.loggedInUserName} /> : <OpenBisnnes saveNew={this.saveNewBiz} />} />
 
       </Router >
 
