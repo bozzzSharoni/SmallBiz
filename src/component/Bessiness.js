@@ -5,10 +5,10 @@ class Bessiness extends Component {
     super()
   }
 
+
   render() {
 
-    return <div>Hello, (user name...) it my {this.props.name}
-      
+    return    <div >Hello, (user name...) it my {this.props.name}
     </div>
   }
 

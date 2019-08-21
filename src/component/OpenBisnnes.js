@@ -29,6 +29,7 @@ class OpenBisnnes extends Component {
         let id = e.target.id
         let name = e.target.name
         let text = e.target.value
+        console.log(text, name, id, e.target)
         if (id === 'hores') {
             if (text[2] + text[3] !== "00") {
                 let min = parseInt(text[2] + text[3]) / 60
@@ -54,7 +55,7 @@ class OpenBisnnes extends Component {
         let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + 3
         console.log(length)
         console.log(Object.keys(this.state.newBusines).length)
-        if (Object.keys(this.state.newBusines).length === length) {
+        if (Object.keys(this.state.newBusines).length === length || Object.keys(this.state.newBusines).length === length - 1) {
             let allFieldAreFull = true
             for (let i in this.state.newBusines) {
                 console.log(this.state.newBusines[i])
@@ -73,6 +74,7 @@ class OpenBisnnes extends Component {
         this.props.saveNew(this.state.newBusines)
         alert("work and need to open new busnies")
         this.state.newBusines = {}
+        
     }
 
     appointmentComfirm = (e) => {
@@ -127,19 +129,41 @@ class OpenBisnnes extends Component {
             </label>)}
             <h5> select work hours </h5>
 
-            <label>Browser Select</label>
-            <select class="browser-default" name="field" onChange={this.updeBesniiesText}>
+            <label>Busniess Catgiry Select</label>
+            <datalist class="browser-default" name="field" onChange={this.updeBesniiesText}>
                 <option value="" disabled selected>Choose your Catgory</option>
                 {Catgories.map(c => <option value={c}> {c}</option>)}
-            </select>
+            </datalist>
+
+            <div>
+                Catgory: <datalist id="searchCatgory" className='select-input' name="field" onChange={this.updeBesniiesText}>
+                    {Catgories.map(c => <option value={c}>{c} </option>)}
+                </datalist>
+                <input autoComplete="on" list="searchCatgory" name="field"
+                    value={this.state.newBusines.field}
+                    placeholder='Catgory' onChange={this.updeBesniiesText} className='select-input' />
+            </div>
+
+            {/* <div>
+                    Client: <datalist id="searchClient" className='select-input' onChange={this.updateClientNameState}>
+                        {data.map(c => <option value={c.name}>{c.name} </option>)}
+                    </datalist>
+                    <input autoComplete="on" list="searchClient"
+                        value={this.state.clientName}
+                        placeholder='Client Name' onChange={this.updateClientNameState} className='select-input' />
+                </div> */}
 
 
             {BesniessSetupHours.map(b =>
-                <label>{b}
-                    <select id="hores" class="browser-default" name={b} onChange={this.updeBesniiesText}>
-                        <option disabled selected>Choose your {b}</option>
-                        {hoursList.map(h => <option value={h}> {h}</option>)}
-                    </select> </label>
+                <div>
+                    <label>{b}
+                        <datalist id="searchHores" className='select-input' name={b} onChange={this.updeBesniiesText}>
+                            <option disabled selected>Choose your {b}</option>
+                            {hoursList.map(h => <option value={h}> {h}</option>)}
+                        </datalist> </label>
+                    <input autoComplete="on" id="hores" list="searchHores" name={b}
+                        placeholder='Hours' onChange={this.updeBesniiesText} className='select-input' />
+                </div>
             )}
 
             <br></br>

@@ -41,6 +41,7 @@ class App extends Component {
     })
     if (saveStatus.data == 'succes!') {
       alert('signed up successfully')
+      this.setState({ifBuisnuess : true })
     } else {
       alert('there was a problem with the sign up, please try again')
     }
