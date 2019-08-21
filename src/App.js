@@ -84,6 +84,13 @@ class App extends Component {
   }
 
   saveNewBiz = async (object) => {
+    // let name = "location"
+    // let lat = "lat"
+    // let lng = "lng"
+    // console.log(location.lat,location.lng)
+    // object[name][lat] = location.lat
+    // object[name][lng] =location.lng
+    console.log(object)
     let save = await axios.post('http://localhost:8000/addnewbusiness', object)
     if (save.data == 'succes!') {
       alert('signed up successfully')

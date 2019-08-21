@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../config/firebase'
+import { async } from 'q';
 // import Checkbox from 'react-materialize/lib/Checkbox';
 // import Select from 'react-materialize/lib/Checkbox';
 
@@ -9,7 +10,8 @@ class OpenBisnnes extends Component {
     constructor() {
         super()
         this.state = {
-            newBusines: { days: {} },
+            newBusines: { location : { hight : 0, wight : 0}, days: {} },
+            ifLocation : 0,
             stringInput: ["name", "email", "password", "description", "img", "owner", "payment", "country", "city", "address", "service"],
             numbersInput: ["price", "averageAppointmentTime"],
             daysList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -52,7 +54,7 @@ class OpenBisnnes extends Component {
 
     createNewBussnies = () => {
         console.log(this.state.newBusines)
-        let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + 3
+        let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + this.state.ifLocation + 4
         console.log(length)
         console.log(Object.keys(this.state.newBusines).length)
         if (Object.keys(this.state.newBusines).length === length || Object.keys(this.state.newBusines).length === length - 1) {
@@ -67,14 +69,16 @@ class OpenBisnnes extends Component {
         } else { alert("sorry all field must be valid") }
         // ojj = {}
     }
+
+
     clearInputs = () => {
         firebase.auth().createUserWithEmailAndPassword(this.state.newBusines.email, this.state.newBusines.password).catch((error) => {
             console.log(error)
         })
-        this.props.saveNew(this.state.newBusines)
+        this.props.saveNew(this.state.newBusines,this.state.currentAddress)
         alert("work and need to open new busnies")
         this.state.newBusines = {}
-        
+
     }
 
     appointmentComfirm = (e) => {
@@ -99,6 +103,37 @@ class OpenBisnnes extends Component {
         }
             // , function () { console.log(this.state.newBusines[name]) }
         )
+    }
+
+    getGeoLocation = () => {
+        let r = window.confirm("it will get your busniess location only if you in your busniies")
+        if (r == true) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        let location = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        }
+                        let hight = location.lat
+                        let wight = location.lng
+                        let newBusines = {...this.state.newBusines}
+                        newBusines.location.hight = hight
+                        newBusines.location.wight = wight
+                        console.log(newBusines)
+                        // console.log(hight,wight)
+                        this.setState({
+                            newBusines : newBusines,
+                            ifLocation : 1
+                        }, function () {
+                            // console.log(this.state.currentAddress.lng)
+                        })
+                    }
+                )
+            } 
+        } else {
+            alert("so we will uesed on your adrees that you fill in before")
+        }
     }
 
     render() {
@@ -167,6 +202,7 @@ class OpenBisnnes extends Component {
             )}
 
             <br></br>
+            <button onClick={this.getGeoLocation}> do you want us to get your location for your busniines </button>
             <button onClick={this.createNewBussnies}>Add New User <i class="material-icons right">send</i> </button>
 
         </div>
