@@ -21,23 +21,35 @@ router.post('/addnewuser', function (req, res) {
 
 
 
-// getCatgoties =  function () {
+getCatgoties = async function () {
+// await Category.findOneAndDelete({}).exec(function (err,Category){
+//     console.log(Category[0])
+//     obj3 = {}
+// })
+    let obj = {
+        Catgories: []
+    }
+    let obj1 = {}
+    await Business.find({}).exec(function (err, businesses) {
+        businesses.forEach(b => obj1[b.field] = { name: b.field, img: b.img, description: "jhdskjkjhfk" })
+        // obj = JSON.stringify(obj)
+        // console.log(obj1)
+        for (let i in obj1) {
+            // console.log(i)
+            // console.log(obj1[i])
+            obj.Catgories.push(obj1[i])
+        }
+        //    obj = JSON.stringify(obj)
+        console.log(obj)
+        new Category(obj).save()
+    })
 
-//     let obj = {
-//         Catgories: {}
-//     }
-//     Business.find({}).exec(function (err, businesses) {
-//         businesses.forEach(b => obj.Catgories[b.field] = { name: b.field, img: "jhgjhbjhb" })
-//         obj = JSON.stringify(obj)
-//         console.log(obj)
-//         new Category(obj).save()
-//     })
-    
-//     // console.log(obj)
-// }
+
+    // console.log(obj)
+}
 
 
-// getCatgoties()
+getCatgoties()
 
 
 router.get('/Catgories', function (req, res) {
@@ -50,6 +62,7 @@ router.get('/Catgories', function (req, res) {
 
 
 router.post('/addCatgories', function (req, res) {
+    console.log(req.body)
     new Category(req.body).save()
     res.send('succes!')
 })
