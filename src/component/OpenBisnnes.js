@@ -127,19 +127,37 @@ class OpenBisnnes extends Component {
             </label>)}
             <h5> select work hours </h5>
 
-            <label>Browser Select</label>
-            <select class="browser-default" name="field" onChange={this.updeBesniiesText}>
+            <label>Busniess Catgiry Select</label>
+            <datalist class="browser-default" name="field" onChange={this.updeBesniiesText}>
                 <option value="" disabled selected>Choose your Catgory</option>
                 {Catgories.map(c => <option value={c}> {c}</option>)}
-            </select>
+            </datalist>
+
+            <div>
+                    Catgory: <datalist id="searchCatgory" className='select-input' name="field" onChange={this.updeBesniiesText}>
+                        {Catgories.map(c => <option value={c}>{c} </option>)}
+                    </datalist>
+                    <input autoComplete="on" list="searchCatgory"
+                        value={this.state.newBusines.field}
+                        placeholder='Catgory' onChange={this.updeBesniiesText} className='select-input' />
+                </div>
+
+                {/* <div>
+                    Client: <datalist id="searchClient" className='select-input' onChange={this.updateClientNameState}>
+                        {data.map(c => <option value={c.name}>{c.name} </option>)}
+                    </datalist>
+                    <input autoComplete="on" list="searchClient"
+                        value={this.state.clientName}
+                        placeholder='Client Name' onChange={this.updateClientNameState} className='select-input' />
+                </div> */}
 
 
             {BesniessSetupHours.map(b =>
                 <label>{b}
-                    <select id="hores" class="browser-default" name={b} onChange={this.updeBesniiesText}>
+                    <datalist id="hores" class="browser-default" name={b} onChange={this.updeBesniiesText}>
                         <option disabled selected>Choose your {b}</option>
                         {hoursList.map(h => <option value={h}> {h}</option>)}
-                    </select> </label>
+                    </datalist> </label>
             )}
 
             <br></br>
