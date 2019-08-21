@@ -107,7 +107,7 @@ class App extends Component {
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home Catgories={this.state.Catgories} email={this.state.user.email} getName={this.getName} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
-        <Route path="/OpenBisnnes" render={() => <OpenBisnnes saveNew={this.saveNewBiz} />} />
+        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home Catgories={this.state.Catgories} email={this.state.user.email} getName={this.getName}/> : <OpenBisnnes saveNew={this.saveNewBiz} />} />
 
       </Router >
 
