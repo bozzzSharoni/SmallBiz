@@ -48,7 +48,7 @@ class App extends Component {
 
   saveNewBiz = async (object) => {
     let save = await axios.post('http://localhost:8000/addnewbusiness', object)
-    if (save.data == 'success!') {
+    if (save.data == 'succes!') {
       alert('signed up successfully')
     } else{
       alert('there was a problem with the sign up, please try again')
