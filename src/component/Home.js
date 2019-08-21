@@ -21,8 +21,6 @@ class Home extends Component {
         this.setState({ loggedInUserName: response.data.name })
     }
 
-
-
     render() {
         this.getName()
         return <div> Home
