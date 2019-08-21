@@ -4,11 +4,11 @@ import firebase from '../config/firebase'
 class Login extends Component {
 
     login = (e) => {
-        this.props.getName()
         e.preventDefault()
         firebase.auth().signInWithEmailAndPassword(this.props.email, this.props.password).catch((error) => {
             console.log(error)
         })
+        // this.props.getName()
     }
 
     render() {
