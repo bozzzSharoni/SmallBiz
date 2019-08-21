@@ -113,6 +113,12 @@ router.get('/getuser/:email', function (req, res) {
 
 router.get('/getbyfield/:field', function (req, res) {
     Business.find({ field: req.params.field }).exec(function (err, response) {
+        res.send(response[0])
+    })
+})
+
+router.get('/getbyname/:name', function (req, res) {
+    Business.find({ name: req.params.name }).exec(function (err, response) {
         res.send(response)
     })
 })

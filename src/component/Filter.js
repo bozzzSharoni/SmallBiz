@@ -17,14 +17,14 @@ class Filter extends Component {
 
     getBusinesses = async () => {
         let businessess = await axios.get(`http://localhost:8000/getbyfield/${this.props.name}`)
-        this.setState({ businessess: businessess.data }, function () {
+        this.setState({ businessess: [businessess.data] }, function () {
             console.log(this.state)
         })
     }
 
     render() {
         const bizCategory = this.props.name
-
+        console.log(this.state)
         return <div >Filter
             <h3>{bizCategory}</h3>
             {this.state.businessess.map(b=>{return <div class="card small">
