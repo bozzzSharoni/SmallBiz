@@ -12,6 +12,7 @@ const BusinessSchema = new Schema({
     appointmentComfirm: Boolean,
     country: String,
     city: String,
+    location : Object,
     address: String,
     field: String,
     service: String,

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const CategorySchema = new Schema({
-    Catgories: Object
+    Catgories: Array
 })
 
 const Category = mongoose.model("Category", CategorySchema)
