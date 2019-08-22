@@ -14,10 +14,10 @@ class SignUp extends Component {
 
   signup = async (e) => {
     e.preventDefault()
-    this.props.saveUser()
     await firebase.auth().createUserWithEmailAndPassword(this.props.state.email, this.props.state.password).catch((error) => {
       console.log(error)
     })
+    this.props.saveUser()
     // this.props.getName()
   }
 

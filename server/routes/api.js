@@ -122,23 +122,26 @@ router.post('/addnewappointment', function (req, res) {
     res.send('succes!')
 })
 
-router.put('/makeapp/:id', function (req, res) {
-    let id = req.params.id
+router.put('/makeapp/:bId/:uId', function (req, res) {
+    let bId = req.params.bId
+    let uId = req.params.uId
     let date = req.body.date
     let time = req.body.time
-    console.log(id, date, time)
-    Business.findOne({ _id: id }).exec(function (err, buss) {
+    console.log(date, time, uId, bId)
+
+    Business.findOne({ _id: bId }).exec(function (err, buss) {
         let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
-        console.log(index)
-        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
-        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
-        console.log(buss)
+        // console.log(index)
+        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
+        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
+        // console.log(buss)
 
 
-        Business.findByIdAndUpdate({ _id: id }, buss, function () {
+        Business.findByIdAndUpdate({ _id: bId }, buss, function () {
             res.end()
             // console.log(buss, id)
         })
+
 
 
         // let buss = {...buss}
@@ -151,6 +154,17 @@ router.put('/makeapp/:id', function (req, res) {
         // x.save()
         // res.end()
     })
+    // let obj = {
+    //     userId: uId,
+    //     businessId: bId,
+    //     date: date,
+    //     time: time,
+    //     rating: 10,
+    //     didGetNotification: true,
+    // }
+    // new Appointment(obj).save()
+    // res.send('succes!')
+
 })
 
 router.get('/getuser/:email', (req, res) => {

@@ -10,26 +10,26 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            loggedInUserName: ''
+            loggedInUserName: undefined
         }
     }
 
-    // componentDidUpdate = () => {
-    //   this.getName()
-    // }
+    componentDidMount = () => {
+      this.getName()
+    }
 
     logout = () => {
         firebase.auth().signOut()
     }
 
     getName = async () => {
-        let y = this.props.state
-        console.log(y, this.props.state.user.email)
-        let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
+        if(this.state.loggedInUserName === undefined ){
+            console.log(this.props.state.user.email)
+            let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
+            console.log(response)
+            this.setState({ loggedInUserName: response.data.name }, function () { console.log(this.state.loggedInUserName) })
 
-        console.log(response)
-
-        this.setState({ loggedInUserName: "we love you very much " + response.data.name }, function () { console.log(this.state.loggedInUserName) })
+        }
     }
 
 
@@ -42,17 +42,14 @@ class Home extends Component {
 
     // hasEndedTimer(getName)
 
-    onMyClick = () => {
-        this.getName()
-    }
+   
 
 
     render() {
         // this.getName()
         console.log(this.props.state)
         return <div> Home
-        <h4> {this.state.loggedInUserName} </h4>
-            <a class="waves-effect waves-light btn-small" onClick={this.onMyClick}>give me some love</a>
+        <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null } </h4>
             {this.props.Catgories.map(c =>
                 <div class="row">
                     <div class="col s12 m7">
@@ -73,11 +70,6 @@ class Home extends Component {
 
                 </div>
             )}
-
-            {/* {this.props.Catgories.map(c => */}
-            {/* <li ><Link to={`/Filter/${c}`} >Some Catgory/ {c} </Link></li> */}
-            {/* )} */}
-
             <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
         </div>
