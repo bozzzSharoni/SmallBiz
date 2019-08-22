@@ -6,6 +6,7 @@ const User = require('../models/User')
 const Appointment = require('../models/Appointment')
 const moment = require('moment')
 const Category = require('../models/CategorySchema')
+const mongoose = require('mongoose')
 
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
@@ -23,11 +24,11 @@ router.post('/addnewuser', function (req, res) {
 
 
 getCatgoties = async function () {
+    // mongoose.connection.db.dropCollection('categories')
     // await Category.findOneAndDelete({}).exec(function (err, Category) {
     //     console.log(Category[0])
     //     obj3 = {}
     // })
-    Category.remove({})
     let obj = {
         Catgories: []
     }
@@ -42,7 +43,7 @@ getCatgoties = async function () {
             obj.Catgories.push(obj1[i])
         }
         //    obj = JSON.stringify(obj)
-        console.log(obj)
+        // console.log(obj)
         new Category(obj).save()
     })
     // console.log(obj)
@@ -52,14 +53,14 @@ getCatgoties = async function () {
 
 
 
-getCatgoties()
 
 
 router.get('/Catgories', function (req, res) {
     Category.find({}).exec(function (err, Category) {
-        console.log(Category)
+        // console.log(Category)
         res.send(Category)
     })
+    getCatgoties()
 })
 
 
@@ -123,30 +124,55 @@ router.post('/addnewappointment', function (req, res) {
 
 router.put('/makeapp/:id', function (req, res) {
     let id = req.params.id
+    let date = req.body.date
+    let time = req.body.time
+    console.log(id, date, time)
     Business.findOne({ _id: id }).exec(function (err, buss) {
+        let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
+        console.log(index)
+        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
+        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
+        console.log(buss)
+
+
+        Business.findByIdAndUpdate({ _id: id }, buss, function () {
+            res.end()
+            // console.log(buss, id)
+        })
+
+
         // let buss = {...buss}
-        let x = buss
-        let relevant = x.availableAppointments.find(a => a[req.body.date])
-        let index = relevant[req.body.date].indexOf(req.body.time)
-        x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
-        
-        console.log(x.availableAppointments)
-        x.save()
-        res.end()
+        // let x = buss
+        // let relevant = x.availableAppointments.find(a => a[req.body.date])
+        // let index = relevant[req.body.date].indexOf(req.body.time)
+        // x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
+
+        // console.log(x.availableAppointments)
+        // x.save()
+        // res.end()
     })
 })
 
-router.get('/getuser/:email', function (req, res) {
-    User.find({ email: req.params.email }).exec(function (err, users) {
-        res.send(users[0])
+router.get('/getuser/:email', (req, res) => {
+    let key = Object.keys(req.params)[0]
+    let value = req.params[key]
+    console.log(key, value)
+    User.findOne({ [key]: value }).exec(function (err, user) {
+        console.log(user)
+        res.send(user)
     })
 })
 
 router.get('/getbyfield/:field', function (req, res) {
-    Business.find({ field: req.params.field }).exec(function (err, response) {
-        res.send(response[0])
+    let key = Object.keys(req.params)[0]
+    let value = req.params[key]
+    Business.find({ [key]: value }).exec(function (err, response) {
+        console.log(response)
+        res.send(response)
     })
 })
+
+
 
 router.get('/getbyname/:name', function (req, res) {
     Business.find({ name: req.params.name }).exec(function (err, response) {
