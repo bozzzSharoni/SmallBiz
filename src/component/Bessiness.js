@@ -35,12 +35,16 @@ class Bessiness extends Component {
   func = () => {
     let arr = []
     let counter = -1
+    let biz = this.state.business[0].availableAppointments.slice(1, 8)
+    console.log(biz)
+    let as = biz.map((a) => a[`${moment().add(0, 'day').format('L')}`])
+    console.log(as)
     for (let i = 0; i < 8; i++) {
-      console.log(counter++)
+      // console.log(counter++)
       arr.push(this.state.business[0].availableAppointments.slice(1, 8).map((a, ind) => a[moment().add(ind, 'day').format('L')])[0].map((b,ind) => <div id={b} onClick={this.makeAnAppointment}>{b} {ind} </div>))
-      this.state.business[0].availableAppointments.slice(1, 8).map(a => console.log(a))
+      // this.state.business[0].availableAppointments.slice(1, 8).map(a => console.log(a))
     }
-    return arr
+    // return arr
 }
 
   render() {
