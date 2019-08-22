@@ -68,7 +68,9 @@ class App extends Component {
   }
 
   saveNewUserToDb = async () => {
+    console.log(this.state.user.uid)
     let saveStatus = await axios.post('http://localhost:8000/addnewuser', {
+      _id : this.state.user.uid,
       name: this.state.name,
       password: this.state.password,
       phone: this.state.phone,
@@ -108,7 +110,7 @@ class App extends Component {
   }
 
 
-  authListener  () {
+  authListener() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user: user, userEmail: user.email }, function () {
@@ -143,7 +145,7 @@ class App extends Component {
         <Route path="/About" render={() => <About state={this.state} />} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
-        <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness name={match.params.BesniessName} />} />
+        <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness state={this.state} name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
 
         <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes saveNew={this.saveNewBiz} />} />

@@ -34,7 +34,8 @@ class Bessiness extends Component {
     let object = { date: date, time: time }
     console.log(object)
     console.log(date, time)
-    await axios.put(`http://localhost:8000/makeapp/${this.state.business[0]._id}`, object)
+    console.log(this.props.state.user.uid)
+    await axios.put(`http://localhost:8000/makeapp/${this.state.business[0]._id}/${this.props.state.user.uid}`, object)
     console.log(this.state.business[0].availableAppointments)
   }
 
