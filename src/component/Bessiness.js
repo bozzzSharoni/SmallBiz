@@ -52,6 +52,8 @@ class Bessiness extends Component {
     // let as = biz.map(a => a[moment().add(0, 'day').format('L')])[0]
     // let ac = biz.map(a => a[moment().add(2, 'day').format('L')])[2]
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
+    let length = days.length
+    days = days.slice(1,length)
     // let hours = this.state.business[0].availableAppointments.find(h => Object.keys(h)[0] === "08/22/2019")["08/22/2019"] ********************************************
     // console.log(biz)
     // console.log(as)
