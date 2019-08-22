@@ -105,7 +105,7 @@ class Bessiness extends Component {
           <h2>{b.name}</h2>
           <img src={b.img}></img>
           <p>{b.description}</p>
-          <button onClick={this.changeDisplay}>Make an appointment</button></div>
+          <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       {this.state.displayAppo && this.state.business[0] ? this.func() : null}
       {/* 
