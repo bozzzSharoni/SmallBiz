@@ -44,6 +44,7 @@ class Bessiness extends Component {
     let length = days.length
     days = days.slice(1, length)
 
+
     console.log(days)
 
 
@@ -65,7 +66,6 @@ class Bessiness extends Component {
         </select>
       </div>)}
     </div>
-
   }
 
 

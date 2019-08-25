@@ -32,20 +32,20 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
         Business.findByIdAndUpdate({ _id: bId }, buss, function () {
             res.end()
             // console.log(buss, id)
+            let obj = {
+                userId: uId,
+                businessId: bId,
+                date: date,
+                time: time,
+                rating: 10,
+                didGetNotification: true,
+            }
+            new Appointment(obj).save()
+            res.send('succes!')
         })
 
-
-
-        // let buss = {...buss}
-        // let x = buss
-        // let relevant = x.availableAppointments.find(a => a[req.body.date])
-        // let index = relevant[req.body.date].indexOf(req.body.time)
-        // x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
-
-        // console.log(x.availableAppointments)
-        // x.save()
-        // res.end()
     })
+
     let obj = {
         userId: uId,
         businessId: bId,
@@ -56,7 +56,7 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
     }
     new Appointment(obj).save()
 
-})
+ })
 
 
 newDay = () => {
@@ -203,6 +203,7 @@ router.post('/addnewappointment', function (req, res) {
     a1.save()
     res.send('succes!')
 })
+
 
 
 router.get('/getuser/:email', (req, res) => {
