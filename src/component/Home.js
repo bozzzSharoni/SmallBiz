@@ -61,7 +61,7 @@ class Home extends Component {
         console.log(this.state)
         return <div> Home
         <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null } </h4>
-        <img src={this.state.loggedInUserImg}/>
+        <img className="circle responsive-img" src={this.state.loggedInUserImg}/>
             {this.props.Catgories.map(c =>
                 <div class="row">
                     <div class="col s12 m7">
