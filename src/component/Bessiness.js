@@ -61,6 +61,7 @@ class Bessiness extends Component {
     // let biz = this.state.business[0].availableAppointments.slice(1, 8)
     // let as = biz.map(a => a[moment().add(0, 'day').format('L')])[0]
     // let ac = biz.map(a => a[moment().add(2, 'day').format('L')])[2]
+    // let x = 0
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
     let length = days.length
     days = days.slice(1,length)
@@ -121,13 +122,7 @@ class Bessiness extends Component {
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       {this.state.displayAppo && this.state.business[0] ? this.func() : null}
-      {/* 
-      //   return <div>
-      //     <span>{a.regularDay[0]}</span>
-
-
-      //   </div>
-      // }) : <div>hi</div>} */}
+ 
     </div>)
   }
 

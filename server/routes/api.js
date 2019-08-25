@@ -12,6 +12,53 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
+
+
+router.put('/makeapp/:bId/:uId', function (req, res) {
+    let bId = req.params.bId
+    let uId = req.params.uId
+    let date = req.body.date
+    let time = req.body.time
+    console.log(date, time, uId, bId)
+
+    Business.findOne({ _id: bId }).exec(function (err, buss) {
+        let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
+        // console.log(index)
+        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
+        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
+        // console.log(buss)
+
+
+        Business.findByIdAndUpdate({ _id: bId }, buss, function () {
+            res.end()
+            // console.log(buss, id)
+  // let obj = {
+    //     userId: uId,
+    //     businessId: bId,
+    //     date: date,
+    //     time: time,
+    //     rating: 10,
+    //     didGetNotification: true,
+    // }
+    // new Appointment(obj).save()
+    // res.send('succes!')       
+ })
+
+    })
+})
+    let obj = {
+        userId: uId,
+        businessId: bId,
+        date: date,
+        time: time,
+        rating: 10,
+        didGetNotification: true,
+    }
+    new Appointment(obj).save()
+
+})
+
+
 router.post('/addnewuser', function (req, res) {
     let u1 = new User(req.body)
     u1.save()
@@ -122,61 +169,7 @@ router.post('/addnewappointment', function (req, res) {
     res.send('succes!')
 })
 
-router.put('/makeapp/:bId/:uId', function (req, res) {
-    let bId = req.params.bId
-    let uId = req.params.uId
-    let date = req.body.date
-    let time = req.body.time
-    console.log(date, time, uId, bId)
 
-    Business.findOne({ _id: bId }).exec(function (err, buss) {
-        let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
-        // console.log(index)
-        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
-        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
-        // console.log(buss)
-
-
-        Business.findByIdAndUpdate({ _id: bId }, buss, function () {
-            res.end()
-            // console.log(buss, id)
-        })
-
-
-
-        // let buss = {...buss}
-<<<<<<< HEAD
-        let x = buss
-        let relevant = x.availableAppointments.find(a => a[req.body.date])
-        let index = relevant[req.body.date].indexOf(req.body.time)
-        x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
-
-        console.log(x.availableAppointments)
-        x.save()
-        res.end()
-=======
-        // let x = buss
-        // let relevant = x.availableAppointments.find(a => a[req.body.date])
-        // let index = relevant[req.body.date].indexOf(req.body.time)
-        // x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
-
-        // console.log(x.availableAppointments)
-        // x.save()
-        // res.end()
->>>>>>> 9ee8175a102cf727e3bf98326286b63d1bd6c6bf
-    })
-    // let obj = {
-    //     userId: uId,
-    //     businessId: bId,
-    //     date: date,
-    //     time: time,
-    //     rating: 10,
-    //     didGetNotification: true,
-    // }
-    // new Appointment(obj).save()
-    // res.send('succes!')
-
-})
 
 router.get('/getuser/:email', (req, res) => {
     let key = Object.keys(req.params)[0]
