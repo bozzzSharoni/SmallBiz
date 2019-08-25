@@ -59,6 +59,39 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
  })
 
 
+newDay = () => {
+    Business.find({}).exec(function (err, businesses) {
+        for (let i of businesses) {
+            let regularDay = i.availableAppointments[0].regularDay
+            // console.log(regularDay)
+            let length = i.availableAppointments.length
+            // console.log(length)
+            let lastDay = Object.keys(i.availableAppointments[length - 1])
+            lastDay = moment(lastDay, 'L')
+            // console.log(lastDay)
+            let today = moment(moment().format('L'), 'M/D/YYYY');
+            let newDayNumber = lastDay.diff(today, 'days') + 1
+            // console.log(lastDay, today, newDayNumber)
+            // console.log(newDayNumber)
+            let newDay = moment().add(newDayNumber, 'day').format('L')
+            // console.log(newDay)
+            let x = moment(newDay).format('dddd')
+            // console.log(x)
+            let daysOfWork = Object.keys(i.days)
+            // console.log(daysOfWork)
+            !daysOfWork.find(d => d === x) ? newDayNumber += 1 : null
+            // console.log(newDayNumber)
+            i.availableAppointments.push({ [moment().add(newDayNumber, 'day').format('L')]: regularDay })
+            // console.log(i.availableAppointments)
+            let id = i._id
+            Business.findByIdAndUpdate({ _id: id }, i, function () {
+            })
+        }
+    })
+}
+
+// newDay()
+
 router.post('/addnewuser', function (req, res) {
     let u1 = new User(req.body)
     u1.save()
@@ -124,22 +157,24 @@ router.post('/addnewbusiness', async function (req, res) {
     req.body.averageAppointmentTime = parseInt(req.body.averageAppointmentTime)
     let b1 = new Business(req.body)
     let dailySchedule = await getDailySchedule(req.body)
+    let daysOfWork = Object.keys(b1.days)
+    let obj = {}
+    let x = 0
+    for (let i = 0; x < 10; i++) {
+        if (daysOfWork.find(d => d === moment((moment().add(i, 'day').format('L'))).format('dddd'))) {
+            obj[moment().add(i, 'day').format('L')] = dailySchedule
+            x++
+        }
+    }
+    // console.log(Object.keys(obj))
     b1.availableAppointments = [
         { regularDay: dailySchedule },
-        { [moment().format('L')]: dailySchedule },
-        { [moment().subtract(1, 'day').format('L')]: dailySchedule },
-        { [moment().add(2, 'day').format('L')]: dailySchedule },
-        { [moment().add(3, 'day').format('L')]: dailySchedule },
-        { [moment().add(4, 'day').format('L')]: dailySchedule },
-        { [moment().add(5, 'day').format('L')]: dailySchedule },
-        { [moment().add(6, 'day').format('L')]: dailySchedule },
-        { [moment().add(7, 'day').format('L')]: dailySchedule },
-        { [moment().add(8, 'day').format('L')]: dailySchedule },
-        { [moment().add(9, 'day').format('L')]: dailySchedule },
+        obj
     ]
     b1.save()
     res.send('succes!')
 })
+
 
 getDailySchedule = function (object) {
 
