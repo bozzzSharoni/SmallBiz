@@ -93,29 +93,26 @@ router.post('/addnewuser', function (req, res) {
 
 
 getCatgoties = async function () {
-    // mongoose.connection.db.dropCollection('categories')
-    // await Category.findOneAndDelete({}).exec(function (err, Category) {
-    //     console.log(Category[0])
-    //     obj3 = {}
-    // })
+    let id = "5d62ea1f8cf5dc39488c1000"
     let obj = {
+        id: id,
         Catgories: []
     }
     let obj1 = {}
     await Business.find({}).exec(function (err, businesses) {
-        businesses.forEach(b => obj1[b.field] = { name: b.field, img: b.img, description: b.description })
-        // obj = JSON.stringify(obj)
-        // console.log(obj1)
-        for (let i in obj1) {
-            // console.log(i)
-            // console.log(obj1[i])
+        businesses.forEach(b =>
+            obj1[b.field] = { name: b.field, img: b.img, description: b.description }
+        )
+        for ( let i in obj1 ){
+            // let obj2 =  obj1[i] 
             obj.Catgories.push(obj1[i])
         }
-        //    obj = JSON.stringify(obj)
-        // console.log(obj)
+        console.log(obj.Catgories)
+
+        Category.findOneAndDelete({ id: id }, function (err, x) {
+        })
         new Category(obj).save()
     })
-    // console.log(obj)
 }
 
 
@@ -125,11 +122,11 @@ getCatgoties = async function () {
 
 
 router.get('/Catgories', function (req, res) {
+    getCatgoties()
     Category.find({}).exec(function (err, Category) {
         // console.log(Category)
         res.send(Category)
     })
-    getCatgoties()
 })
 
 
@@ -240,6 +237,34 @@ router.get('/getbyname/:name', function (req, res) {
 //     })
 // },
 //     3000)
+
+
+
+// setTimeout( async() => {
+//     let data = require('../Data/data.json')
+//     console.log(data)
+//     for (let d of data) {
+//         d["price"] = 10
+//         d["averageAppointmentTime"] = 100
+//         let b1 = new Business(d)
+//         let dailySchedule = await getDailySchedule(d)
+//         let daysOfWork = Object.keys(b1.days)
+//         console.log(daysOfWork)
+//         let arr = []
+//         let x = 0
+//         for (let i = 0; x < 10; i++) {
+//             console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
+//             if (daysOfWork.find(d => d === moment((moment().add(i, 'day').format('L'))).format('dddd'))) {
+//                 arr.push({ [moment().add(i, 'day').format('L')]: dailySchedule })
+//                 console.log(moment((moment().add(i, 'day').format('L'))).format('dddd'), "is in")
+//                 x++
+//             }
+//         }
+//         arr.push({ "regularDay": dailySchedule })
+//         b1.availableAppointments = arr
+//         b1.save()
+//     }
+// }, 100)
 
 
 
