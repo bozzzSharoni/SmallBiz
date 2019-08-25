@@ -4,19 +4,19 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 class Maps extends Component {
-    constructor() {
-        super()
+  constructor() {
+    super()
 
-    }
+  }
 
   render() {
-    return     <div>
-    <GooglePlacesAutocomplete
+    return <div>
+      <GooglePlacesAutocomplete
         onSelect={console.log}
-    />
-</div>
+      />
+    </div>
   }
-    
+
 }
-    
+
 export default Maps;

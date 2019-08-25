@@ -36,26 +36,13 @@ class Bessiness extends Component {
   }
 
   func = () => {
-    // let arr = []
-    // arr.push({ [moment().add(0, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[0][moment().add(0, 'day').format('L')] })
-    // arr.push({ [moment().add(1, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[1][moment().add(1, 'day').format('L')] })
-    // arr.push({ [moment().add(2, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[2][moment().add(2, 'day').format('L')] })
-    // arr.push({ [moment().add(3, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[3][moment().add(3, 'day').format('L')] })
-    // arr.push({ [moment().add(4, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[4][moment().add(4, 'day').format('L')] })
-    // arr.push({ [moment().add(5, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[5][moment().add(5, 'day').format('L')] })
-    // arr.push({ [moment().add(6, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[6][moment().add(6, 'day').format('L')] })
-    // console.log(arr)
     let biz = this.state.business[0].availableAppointments.slice(1, 8)
     let as = biz.map(a => a[moment().add(0, 'day').format('L')])[0]
     let ac = biz.map(a => a[moment().add(2, 'day').format('L')])[2]
-    console.log(biz)
     console.log(as)
-    console.log(ac)
-    console.log(moment().add(0, 'day').format('L'))
-    console.log(moment().add(2, 'day').format('L'))
     return <div className={moment().add(0, 'day').format('L')}>
       <h2>{moment().add(0, 'day').format('L')}</h2>
-      {as.map(c => { return <div className={c} onClick={this.makeAnAppointment}>{c} </div> })}
+      {/* {as.map(c => { return <div className={c} onClick={this.makeAnAppointment}>{c} </div> })} */}
     </div>
   }
 

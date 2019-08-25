@@ -129,7 +129,7 @@ router.put('/makeapp/:id', function (req, res) {
         let relevant = x.availableAppointments.find(a => a[req.body.date])
         let index = relevant[req.body.date].indexOf(req.body.time)
         x.availableAppointments.find(a => a[req.body.date])[req.body.date].splice(index, 1)
-        
+
         console.log(x.availableAppointments)
         x.save()
         res.end()
