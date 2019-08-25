@@ -48,7 +48,7 @@ class Home extends Component {
         return <div className="#f1f8e9 light-green lighten-5">
             <h1>Home</h1>
             <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
-            <img  className="circle responsive-img" src={this.state.loggedInUserImg} />
+            <img className="circle responsive-img" src={this.state.loggedInUserImg} />
             <div className="categories">
                 {this.props.Catgories.map(c =>
                     <div className="category">
@@ -56,7 +56,7 @@ class Home extends Component {
                         <div class="card">
                             <div class="card-image">
                                 <img src={c.img}></img>
-                                <span class="card-title">{c.name}</span>
+                                <span className="card-title">{c.name}</span>
                             </div>
                             <div class="card-content">
                                 <p>{c.description}</p>
