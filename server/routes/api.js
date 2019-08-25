@@ -56,7 +56,7 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
     }
     new Appointment(obj).save()
 
-})
+ })
 
 
 router.post('/addnewuser', function (req, res) {

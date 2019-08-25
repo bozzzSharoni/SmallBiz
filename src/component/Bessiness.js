@@ -40,6 +40,19 @@ class Bessiness extends Component {
   }
 
   func = () => {
+    // let arr = []
+    // arr.push({ [moment().add(0, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[0][moment().add(0, 'day').format('L')] })
+    // arr.push({ [moment().add(1, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[1][moment().add(1, 'day').format('L')] })
+    // arr.push({ [moment().add(2, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[2][moment().add(2, 'day').format('L')] })
+    // arr.push({ [moment().add(3, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[3][moment().add(3, 'day').format('L')] })
+    // arr.push({ [moment().add(4, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[4][moment().add(4, 'day').format('L')] })
+    // arr.push({ [moment().add(5, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[5][moment().add(5, 'day').format('L')] })
+    // arr.push({ [moment().add(6, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[6][moment().add(6, 'day').format('L')] })
+    // console.log(arr)
+    // let biz = this.state.business[0].availableAppointments.slice(1, 8)
+    // let as = biz.map(a => a[moment().add(0, 'day').format('L')])[0]
+    // let ac = biz.map(a => a[moment().add(2, 'day').format('L')])[2]
+    // let x = 0
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
     let length = days.length
     days = days.slice(1, length)
@@ -52,6 +65,16 @@ class Bessiness extends Component {
           {/* </select> */}
         </select>
       </div>)}
+      {/* <select class="browser-default" onClick={this.catagorySearch}>
+                            <option className={c} value={c} disabled selected>select hours</option>
+                            <option value={c} className={c} onClick={this.makeAnAppointment}>{c}</option>
+                            <option value="email">E-Mail </option>
+                            <option value="firstContact">First Contact</option>
+                            <option value="emailType">Email Type</option>
+                            <option value="sold">Sold</option>
+                            <option value="owner">Owner</option>
+                            <option value="country">Country</option>
+                        </select> */}
     </div>
   }
 
