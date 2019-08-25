@@ -30,20 +30,20 @@ class Filter extends Component {
 
     return <div >Filter
             <h3>{bizCategory}</h3>
-      <div className="carousel">
+      <div>
         {this.state.businessess.map(b => {
-          return <div class="row">
-            <div class="col s12 m7">
-              <div class="card">
-                <div class="card-image">
+          return <div className="row">
+            <div className="col s12 m7">
+              <div className="card medium">
+                <div className="card-image">
                   <img src={b.img}></img>
-                  <span class="card-title">{b.name}</span>
+                  <span className="card-title">{b.name}</span>
                 </div>
-                <div class="card-content">
+                <div className="card-content">
                   <p> {b.description}
                   </p>
                 </div>
-                <div class="card-action">
+                <div className="card-action">
                   <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
                 </div>
               </div>
@@ -51,7 +51,7 @@ class Filter extends Component {
 
           </div>
         })}
-</div>
+      </div>
     </div>
   }
 
