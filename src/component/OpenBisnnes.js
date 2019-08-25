@@ -10,8 +10,8 @@ class OpenBisnnes extends Component {
     constructor() {
         super()
         this.state = {
-            newBusines: { location : { hight : 0, wight : 0}, days: {} },
-            ifLocation : 0,
+            newBusines: { location: { hight: 0, wight: 0 }, days: {} },
+            ifLocation: 0,
             stringInput: ["name", "email", "password", "description", "img", "owner", "payment", "country", "city", "address", "service"],
             numbersInput: ["price", "averageAppointmentTime"],
             daysList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -75,7 +75,7 @@ class OpenBisnnes extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.newBusines.email, this.state.newBusines.password).catch((error) => {
             console.log(error)
         })
-        this.props.saveNew(this.state.newBusines,this.state.currentAddress)
+        this.props.saveNew(this.state.newBusines, this.state.currentAddress)
         alert("work and need to open new busnies")
         this.state.newBusines = {}
 
@@ -95,14 +95,16 @@ class OpenBisnnes extends Component {
             this.setState({
                 newBusines: newBusines
             })
+        } else {
+
+            newBusines.days[name] = !this.state.newBusines.days[name]
+            // console.log(typeof text)
+            this.setState({
+                newBusines: newBusines
+            }
+                // , function () { console.log(this.state.newBusines[name]) }
+            )
         }
-        newBusines.days[name] = !this.state.newBusines.days[name]
-        // console.log(typeof text)
-        this.setState({
-            newBusines: newBusines
-        }
-            // , function () { console.log(this.state.newBusines[name]) }
-        )
     }
 
     getGeoLocation = () => {
@@ -117,20 +119,20 @@ class OpenBisnnes extends Component {
                         }
                         let hight = location.lat
                         let wight = location.lng
-                        let newBusines = {...this.state.newBusines}
+                        let newBusines = { ...this.state.newBusines }
                         newBusines.location.hight = hight
                         newBusines.location.wight = wight
                         console.log(newBusines)
                         // console.log(hight,wight)
                         this.setState({
-                            newBusines : newBusines,
-                            ifLocation : 1
+                            newBusines: newBusines,
+                            ifLocation: 1
                         }, function () {
                             // console.log(this.state.currentAddress.lng)
                         })
                     }
                 )
-            } 
+            }
         } else {
             alert("so we will uesed on your adrees that you fill in before")
         }
