@@ -15,7 +15,7 @@ class Home extends Component {
     }
 
     componentDidMount = () => {
-      this.getName()
+        this.getName()
     }
 
     logout = () => {
@@ -23,7 +23,7 @@ class Home extends Component {
     }
 
     getName = async () => {
-        if(this.state.loggedInUserName === undefined ){
+        if (this.state.loggedInUserName === undefined) {
             console.log(this.props.state.user.email)
             let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
             console.log(response)
@@ -32,24 +32,9 @@ class Home extends Component {
         }
     }
 
-
-    // hasEndedTimer(callback) {
-    //   const intervalId = setInterval(() => {
-    //     // 'this' is now the window instead of the component? Even though arrow
-    //     callback()
-    //   }, 1000)
-    // }
-
-    // hasEndedTimer(getName)
-
-   
-
-
     render() {
-        // this.getName()
-        console.log(this.props.state)
         return <div> Home
-        <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null } </h4>
+        <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
             {this.props.Catgories.map(c =>
                 <div class="row">
                     <div class="col s12 m7">

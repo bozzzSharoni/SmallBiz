@@ -32,20 +32,20 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
         Business.findByIdAndUpdate({ _id: bId }, buss, function () {
             res.end()
             // console.log(buss, id)
-  // let obj = {
-    //     userId: uId,
-    //     businessId: bId,
-    //     date: date,
-    //     time: time,
-    //     rating: 10,
-    //     didGetNotification: true,
-    // }
-    // new Appointment(obj).save()
-    // res.send('succes!')       
- })
+            let obj = {
+                userId: uId,
+                businessId: bId,
+                date: date,
+                time: time,
+                rating: 10,
+                didGetNotification: true,
+            }
+            new Appointment(obj).save()
+            res.send('succes!')
+        })
 
     })
-})
+
     let obj = {
         userId: uId,
         businessId: bId,
