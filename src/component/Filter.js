@@ -40,8 +40,7 @@ class Filter extends Component {
                   <span class="card-title">{b.name}</span>
                 </div>
                 <div class="card-content">
-                  <p> {b.description}
-                  </p>
+                  <p> {b.description}</p>
                 </div>
                 <div class="card-action">
                   <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
@@ -51,7 +50,7 @@ class Filter extends Component {
 
           </div>
         })}
-</div>
+      </div>
     </div>
   }
 
