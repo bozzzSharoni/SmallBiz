@@ -19,28 +19,17 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
     let uId = req.params.uId
     let date = req.body.date
     let time = req.body.time
-    console.log(date, time, uId, bId)
+    let appointmentComfirm = req.body.appointmentComfirm
+    console.log(date, time, uId, bId, req.body)
 
     Business.findOne({ _id: bId }).exec(function (err, buss) {
         let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
-        // console.log(index)
-        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
-        // console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
-        // console.log(buss)
+        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
+        console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
 
-
+        // res.end()
         Business.findByIdAndUpdate({ _id: bId }, buss, function () {
-            res.end()
             // console.log(buss, id)
-            let obj = {
-                userId: uId,
-                businessId: bId,
-                date: date,
-                time: time,
-                rating: 10,
-                didGetNotification: true,
-            }
-            new Appointment(obj).save()
             res.send('succes!')
         })
 
@@ -52,11 +41,11 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
         date: date,
         time: time,
         rating: 10,
-        didGetNotification: true,
+        appointmentComfirm: appointmentComfirm,
     }
     new Appointment(obj).save()
 
- })
+})
 
 
 newDay = () => {
@@ -158,22 +147,21 @@ router.post('/addnewbusiness', async function (req, res) {
     let b1 = new Business(req.body)
     let dailySchedule = await getDailySchedule(req.body)
     let daysOfWork = Object.keys(b1.days)
-     console.log( daysOfWork)
-    let obj = {}
+    console.log(daysOfWork)
+    let arr = []
     let x = 0
     for (let i = 0; x < 10; i++) {
-    // console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
+        // console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
         if (daysOfWork.find(d => d === moment((moment().add(i, 'day').format('L'))).format('dddd'))) {
-            obj[moment().add(i, 'day').format('L')] = dailySchedule
-            console.log(moment((moment().add(i, 'day').format('L'))).format('dddd'),"is in")
+            arr.push({ [moment().add(i, 'day').format('L')]: dailySchedule })
+            console.log(moment((moment().add(i, 'day').format('L'))).format('dddd'), "is in")
             x++
-        } 
+        }
     }
-    
-    b1.availableAppointments = [
-        { regularDay: dailySchedule },
-      obj
-    ]
+
+    arr.push({ "regularDay": dailySchedule })
+
+    b1.availableAppointments = arr
     b1.save()
     res.send('succes!')
 })
