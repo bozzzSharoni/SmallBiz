@@ -40,6 +40,15 @@ class Bessiness extends Component {
   }
 
   func = () => {
+<<<<<<< HEAD
+    let biz = this.state.business[0].availableAppointments.slice(1, 8)
+    let as = biz.map(a => a[moment().add(0, 'day').format('L')])[0]
+    let ac = biz.map(a => a[moment().add(2, 'day').format('L')])[2]
+    console.log(as)
+    return <div className={moment().add(0, 'day').format('L')}>
+      <h2>{moment().add(0, 'day').format('L')}</h2>
+      {/* {as.map(c => { return <div className={c} onClick={this.makeAnAppointment}>{c} </div> })} */}
+=======
     // let arr = []
     // arr.push({ [moment().add(0, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[0][moment().add(0, 'day').format('L')] })
     // arr.push({ [moment().add(1, 'day').format('L')]: this.state.business[0].availableAppointments.slice(1, 8)[1][moment().add(1, 'day').format('L')] })
@@ -93,6 +102,7 @@ class Bessiness extends Component {
                             <option value="owner">Owner</option>
                             <option value="country">Country</option>
                         </select> */}
+>>>>>>> 9ee8175a102cf727e3bf98326286b63d1bd6c6bf
     </div>
 
   }
