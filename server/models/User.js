@@ -11,6 +11,7 @@ const UserSchema = new Schema({
     points: { type: Number, default: 5 },
     city: String,
     appointments: [],
+    img: String
 })
 
 const User = mongoose.model("User", UserSchema)

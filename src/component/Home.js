@@ -10,12 +10,14 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            loggedInUserName: undefined
+            loggedInUserName: undefined,
+            loggedInUserImg: undefined
         }
     }
 
     componentDidMount = () => {
-      this.getName()
+        this.getName()
+        this.getImg()
     }
 
     logout = () => {
@@ -23,7 +25,7 @@ class Home extends Component {
     }
 
     getName = async () => {
-        if(this.state.loggedInUserName === undefined ){
+        if (this.state.loggedInUserName === undefined) {
             console.log(this.props.state.user.email)
             let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
             console.log(response)
@@ -32,47 +34,42 @@ class Home extends Component {
         }
     }
 
+    getImg = async () => {
+        if (this.state.loggedInUserImg === undefined) {
+            console.log(this.props.state.img)
+            let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
+            this.setState({ loggedInUserImg: response.data.img }, function () { console.log(this.state.loggedInUserImg) })
+        }
+    }
 
-    // hasEndedTimer(callback) {
-    //   const intervalId = setInterval(() => {
-    //     // 'this' is now the window instead of the component? Even though arrow
-    //     callback()
-    //   }, 1000)
-    // }
-
-    // hasEndedTimer(getName)
-
-   
 
 
     render() {
-        // this.getName()
-        console.log(this.props.state)
-        return <div> Home
-        <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null } </h4>
-            {this.props.Catgories.map(c =>
-                <div class="row">
-                    <div class="col s12 m7">
+        return <div className="#f1f8e9 light-green lighten-5">
+            <h1>Home</h1>
+            <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
+            <img  className="circle responsive-img" src={this.state.loggedInUserImg} />
+            <div className="categories">
+                {this.props.Catgories.map(c =>
+                    <div className="category">
+
                         <div class="card">
                             <div class="card-image">
                                 <img src={c.img}></img>
                                 <span class="card-title">{c.name}</span>
                             </div>
                             <div class="card-content">
-                                <p> {c.description}
-                                </p>
+                                <p>{c.description}</p>
                             </div>
                             <div class="card-action">
-                                <li ><Link to={`/Filter/${c.name}`} > {c.name} </Link></li>
-                            </div>
+                                <Link to={`/Filter/${c.name}`} > {c.name} </Link>                            </div>
                         </div>
                     </div>
-
-                </div>
-            )}
+                )}
+            </div>
             <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
-        </div>
+        </div >
     }
 
 }

@@ -46,6 +46,8 @@ class App extends Component {
       phone: '',
       gender: 'male',
       city: '',
+      uploadedImage: null,
+      img: '',
       email: '',
       password: '',
       user: {},
@@ -68,15 +70,18 @@ class App extends Component {
   }
 
   saveNewUserToDb = async () => {
+    // await this.handleUpload()
     console.log(this.state.user.uid)
+    console.log(this.state.img)
     let saveStatus = await axios.post('http://localhost:8000/addnewuser', {
-      _id : this.state.user.uid,
+      _id: this.state.user.uid,
       name: this.state.name,
       password: this.state.password,
       phone: this.state.phone,
       email: this.state.email,
       gender: this.state.gender,
       city: this.state.city,
+      img: this.state.img
     })
     if (saveStatus.data == 'succes!') {
       alert('signed up successfully')
@@ -107,7 +112,49 @@ class App extends Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+
   }
+  handleImage = (e) => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0]
+      this.setState({
+        uploadedImage: image
+      })
+    }
+  }
+
+  handleUpload = () => {
+    const { uploadedImage } = this.state
+    if (this.state.uploadedImage === null) {
+      alert('Please pick a valid image!')
+    }
+    else {
+      const uploadTask = firebase.storage().ref(`images/${uploadedImage.name}`).put(uploadedImage)
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // progress function
+        },
+        (error) => {
+          console.log(error)
+        },
+        () => {
+          firebase.storage().ref('images').child(uploadedImage.name).getDownloadURL().then(url => {
+            this.setState({
+              img: url
+            })
+            console.log(this.state.img)
+
+          })
+        }
+      )
+    }
+    console.log(this.state)
+
+
+  }
+
+
+
 
 
   authListener() {
@@ -127,9 +174,10 @@ class App extends Component {
     return (
       <Router>
         <nav>
-          <div class="nav-wrapper navBar #212121 grey darken-4">
+          <div class="nav-wrapper navBar #e53935 red darken-1">
             <a href="/About" class="brand-logo right"> smallBiz</a> {/* also a link but in html syntax */}
             <ul id="nav-mobile" class="left hide-on-med-and-down">
+
               {/* <li ><Link to="/SingUp">singup  </Link></li> */}
               <li ><Link to="/" >Home</Link></li>
               <li ><Link to="/About">About </Link></li>
@@ -146,9 +194,9 @@ class App extends Component {
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness state={this.state} name={match.params.BesniessName} />} />
-        <Route path="/Signup" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} />} />
+        <Route path="/Signup" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} handleImg={this.handleImage} upload={this.handleUpload} />} />
 
-        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes saveNew={this.saveNewBiz} />} />
+        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
 
 
       </Router >
