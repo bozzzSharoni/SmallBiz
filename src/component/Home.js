@@ -45,7 +45,7 @@ class Home extends Component {
 
 
     render() {
-        return <div className="#f1f8e9 light-green lighten-5">
+        return <div className="#eceff1 blue-grey lighten-5">
             <h1>Home</h1>
             <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
             <img className="circle responsive-img" src={this.state.loggedInUserImg} />
