@@ -54,7 +54,7 @@ let dailySchedule = [
     "8:40",
 ]
 
-let daysOfWork = ["Monday", "Sunday","Thursday"]
+let daysOfWork = ["Monday", "Sunday", "Thursday"]
 let obj = {}
 let x = 0
 for (let i = 0; x < 10; i++) {
@@ -71,3 +71,35 @@ availableAppointments = [
 // console.log(Object.keys(obj))
 
 console.log(availableAppointments)
+
+
+
+let x =
+{
+    id: '5d62ea1f8cf5dc39488c1000',
+    Catgories:
+        [{
+            name: 'mor',
+            img:
+                'https://scontent-yyz1-1.cdninstagram.com/vp/6903e1186277b1657580c0550efb1f23/5D83E201/t51.2885-19/s150x150/55833138_789927684710950_8067812279866884096_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&se=8',
+            description: 'best ever!'
+        },
+        {
+            name: 'bar',
+            img:
+                'https://scontent-yyz1-1.cdninstagram.com/vp/6903e1186277b1657580c0550efb1f23/5D83E201/t51.2885-19/s150x150/55833138_789927684710950_8067812279866884096_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&se=8',
+            description: 'best ever!'
+        },
+        {
+            name: 'Other',
+            img:
+                'https://scontent-yyz1-1.cdninstagram.com/vp/6903e1186277b1657580c0550efb1f23/5D83E201/t51.2885-19/s150x150/55833138_789927684710950_8067812279866884096_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&se=8',
+            description: 'best ever!'
+        },
+        {
+            name: 'carssss',
+            img:
+                'https://static.carsdn.co/cldstatic/wp-content/uploads/HP2019AudiA7.jpg',
+            description: 'jhvjhvjhvj'
+        }]
+}

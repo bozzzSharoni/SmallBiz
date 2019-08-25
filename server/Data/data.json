@@ -1,0 +1,34 @@
+[
+    {
+        "location": {
+            "hight": 31.7845196,
+            "wight": 34.660278
+        },
+        "days": {
+            "Sunday": true,
+            "Tuesday": true,
+            "Wednesday": true,
+            "Thursday": true,
+            "Friday": true
+        },
+        "name": "Snir Halfon",
+        "email": "snir@walla.com",
+        "password": "123456",
+        "description": "best ever!",
+        "img": "https://scontent-yyz1-1.cdninstagram.com/vp/6903e1186277b1657580c0550efb1f23/5D83E201/t51.2885-19/s150x150/55833138_789927684710950_8067812279866884096_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&se=8",
+        "owner": "Mor Bargig",
+        "payment": "bmhb",
+        "country": "israel",
+        "city": "Ashdod",
+        "address": "mosav setulim ahela street ",
+        "service": "sex service",
+        "price": 100,
+        "averageAppointmentTime": 30,
+        "appointmentComfirm": true,
+        "field": "Other",
+        "startTimeTillBrake": 11,
+        "brakeStartTime": 12.5,
+        "breakEndTime": 13.5,
+        "endTime": 17
+    }
+]
