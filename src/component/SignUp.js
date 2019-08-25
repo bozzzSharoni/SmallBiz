@@ -18,6 +18,7 @@ class SignUp extends Component {
       console.log(error)
     })
     this.props.saveUser()
+
     // this.props.getName()
   }
 
@@ -40,6 +41,11 @@ class SignUp extends Component {
           </div>
           <label>City</label>
           <input placeholder='City' value={this.props.state.city} onChange={this.props.handle} type='text' name='city' />
+          <label>Photo</label>
+          <br></br>
+          <input type="file" onChange={this.props.handleImg} />
+          <button onClick={this.props.upload}>Upload Image</button>
+          <br></br><br></br>
           <label>Email Address</label>
           <input placeholder='Enter email' value={this.props.state.email} onChange={this.props.handle} type='email' name='email' />
           <small className='form-text text-muted'>We`ll Never Share Your Email With Anyone Else</small>
@@ -48,7 +54,7 @@ class SignUp extends Component {
           <label>Password</label>
           <input placeholder='Password' value={this.props.state.password} onChange={this.props.handle} type='password' name='password' />
 
-          <button onClick={this.signup} className='btn btn-success'>Signup</button>
+          <button onClick={this.signup} className='btn btn-success'><Link to='/'>Signup</Link></button>
         </div>
       </div>
     </div>

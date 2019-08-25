@@ -10,12 +10,14 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            loggedInUserName: undefined
+            loggedInUserName: undefined,
+            loggedInUserImg: undefined
         }
     }
 
     componentDidMount = () => {
       this.getName()
+      this.getImg()
     }
 
     logout = () => {
@@ -29,6 +31,14 @@ class Home extends Component {
             console.log(response)
             this.setState({ loggedInUserName: response.data.name }, function () { console.log(this.state.loggedInUserName) })
 
+        }
+    }
+
+    getImg = async () => {
+        if(this.state.loggedInUserImg === undefined){
+            console.log(this.props.state.img)
+            let response = await axios.get(`http://localhost:8000/getuser/${this.props.state.user.email}`)
+            this.setState({loggedInUserImg: response.data.img}, function (){console.log(this.state.loggedInUserImg)})
         }
     }
 
@@ -48,8 +58,10 @@ class Home extends Component {
     render() {
         // this.getName()
         console.log(this.props.state)
+        console.log(this.state)
         return <div> Home
         <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null } </h4>
+        <img src={this.state.loggedInUserImg}/>
             {this.props.Catgories.map(c =>
                 <div class="row">
                     <div class="col s12 m7">
