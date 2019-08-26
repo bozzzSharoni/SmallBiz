@@ -17,7 +17,7 @@ class About extends Component {
       <div className="row">
         <div id="whoWeR" className="col s3 left">
           <div className="card panel grey">
-            <span className="card-title white-text text-darken-4">Who we are?</span>
+            <span className="card-title white-text text-darken-4">Who we are</span>
             <blockquote>
               <p>Smallbiz is a platform for connecting small business owners with clients.</p>
               <p>With our platform, you can assign appointments, message business owners and get discounts!</p>
