@@ -69,7 +69,7 @@ class Home extends Component {
                     </div>
                 ) : null }
             </div>
-            <Button variant="contained" color="primary" onClick={this.logout}>Logout<i class="material-icons right">send</i></Button>
+            <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
         </div >
     }
