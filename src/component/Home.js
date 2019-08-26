@@ -4,6 +4,7 @@ import axios from 'axios'
 import firebase from '../config/firebase'
 import Maps from './Maps';
 import { async } from 'q';
+import Button from '@material-ui/core/Button'
 
 
 class Home extends Component {
@@ -62,13 +63,13 @@ class Home extends Component {
                                 <p>{c.description}</p>
                             </div>
                             <div class="card-action">
-                                <Link to={`/Filter/${c.name}`} > {c.name} </Link>
+                                <Link to={`/Filter/${c.name}`}> {c.name} </Link>
                             </div>
                         </div>
                     </div>
                 ) : null }
             </div>
-            <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
+            <Button variant="contained" color="primary" onClick={this.logout}>Logout<i class="material-icons right">send</i></Button>
             {/* <Maps /> */}
         </div >
     }

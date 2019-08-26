@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Button from '@material-ui/core/Button'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class About extends Component {
@@ -20,11 +20,11 @@ class About extends Component {
       <h2>"Wow your website is great! How do I signup?"</h2>
       <p>Click the "Signup" button below and fill in the form.</p>
       <p className="btn pulse">↓</p>
-      <li >{this.props.state.user ? <Link to='/' >Sign-Up</Link> : <Link to='/Signup'>Sign-Up</Link>}</li>
+      <li >{this.props.state.user ? <Button color="primary" href='/' >Sign-Up</Button> : <Button color="primary" href='/Signup'>Sign-Up</Button>}</li>
       <h2>"But wait! I don't want a regular account! How do I sign up as a new business?"</h2>
       <p >What a great question! Click on the "Open your Business Page" button below and enjoy an endless stream of clients for the rest of your life!</p>
       <p className="btn pulse">↓</p>
-      <li ><Link to="/OpenBisnnes"> Open your Business Page </Link></li>
+      <li><Button color="primary" href="/OpenBisnnes">Open your Business Page</Button></li>
     </div>
 
 
