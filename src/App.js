@@ -93,6 +93,7 @@ class App extends Component {
 
   }
   handleImage = (e) => {
+console.log("jhgchjhkjkljkhg")
     if (e.target.files[0]) {
       const image = e.target.files[0]
       this.setState({
@@ -102,6 +103,7 @@ class App extends Component {
   }
 
   handleUpload = () => {
+    console.log("kjgjyfjukguyv")
     const { uploadedImage } = this.state
     if (this.state.uploadedImage === null) {
       alert('Please pick a valid image!')
@@ -174,7 +176,7 @@ class App extends Component {
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness state={this.state} name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} handleImg={this.handleImage} upload={this.handleUpload} />} />
 
-        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
+        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes Catgories={this.state.Catgories} saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
 
 
       </Router >

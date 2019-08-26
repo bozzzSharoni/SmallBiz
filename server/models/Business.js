@@ -28,6 +28,7 @@ const BusinessSchema = new Schema({
     breakEndTime: Number,
     endTime: Number,
     availableAppointments: { type: Array, default: [{ key: "value" }] },
+    // image : String
 })
 
 const Business = mongoose.model("Business", BusinessSchema)
