@@ -38,7 +38,7 @@ class OpenBisnnes extends Component {
         console.log(Catgories)
 
         this.setState({
-            Catgories: Catgories , CatgoriesOn : true
+            Catgories: Catgories, CatgoriesOn: true
         })
         console.log(this.state.Catgories)
     }
@@ -252,19 +252,8 @@ class OpenBisnnes extends Component {
                             value={this.state.newBusines.field}
                             placeholder='Catgory' onChange={this.updeBesniiesText} className='select-input' />
                     </div> </div>
-
-
                 : null
             }
-
-            {/* <div>
-                    Client: <datalist id="searchClient" className='select-input' onChange={this.updateClientNameState}>
-                        {data.map(c => <option value={c.name}>{c.name} </option>)}
-                    </datalist>
-                    <input autoComplete="on" list="searchClient"
-                        value={this.state.clientName}
-                        placeholder='Client Name' onChange={this.updateClientNameState} className='select-input' />
-                </div> */}
 
 
             {BesniessSetupHours.map(b =>

@@ -19,6 +19,7 @@ class Home extends Component {
     }
 
     componentDidMount = () => {
+        this.props.returnCatgories()
         // if(this.state.isUdateCatgoreisFromProps){
         //     this.setState({ Catgories : this.props.Catgories})
         // } 
@@ -114,11 +115,26 @@ class Home extends Component {
 
     resultByCatgory = () => {
         if (this.state.resultByCatgory !== undefined) {
-            return this.state.resultByCatgory.map(r => <div>  <h2>{r.name}</h2>
-                <img src={r.img}></img>
-                <p>{r.description}</p>
-
-                <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>)
+            return this.state.resultByCatgory.map(b => {
+                return <div className="row">
+                  <div className="col s12 m7">
+                    <div className="card medium">
+                      <div className="card-image">
+                        <img src={b.img}></img>
+                        <span className="card-title">{b.name}</span>
+                      </div>
+                      <div className="card-content">
+                        <p> {b.description}
+                        </p>
+                      </div>
+                      <div className="card-action">
+                        <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
+                      </div>
+                    </div>
+                  </div>
+      
+                </div>
+              }  )
         }
     }
 
@@ -153,9 +169,11 @@ class Home extends Component {
 
 
 
-                <input name="input" type="text" value={this.state.fullName} onChange={this.updateusersText} placeholder="type here" /></button>
+                <input name="input" type="text" value={this.state.input} onChange={this.updateusersText} placeholder="type here" /></button>
             <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
+
             <img className="circle responsive-img" src={this.state.loggedInUserImg} />
+
             <img width="200" height="200" className="circle responsive-img" src={this.state.loggedInUserImg} />
             <div className="categories">
                 {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
