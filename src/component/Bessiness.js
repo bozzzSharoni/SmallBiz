@@ -35,7 +35,7 @@ class Bessiness extends Component {
     await axios.put(`http://localhost:8000/makeapp/${this.state.business[0]._id}/${this.props.state.user.uid}`, object)
     await this.makeRequestToMail(this.props.state.userEmail, time, date, this.state.business[0].name)
     await alert("Congratulations!! the appointment is set, count to 3 and check your email :)")
-    // window.location.reload()
+    window.location.reload()
   }
 
   makeRequestToMail = async (email, time, date, business) => {
@@ -51,19 +51,19 @@ class Bessiness extends Component {
 
   func = () => {
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
-    console.log(days)
     let length = days.length
     days = days.slice(1, length)
-    return <div>
-      {days.map(d => <div className={d}>  <h6>{d} {moment(d).format('dddd')} </h6>
+    return <div className="anim">
+      {days.map(d => <div className={d} >
+        <h6>{d} {moment(d).format('dddd')} </h6>
         <select class="browser-default" name={d} onChange={this.makeAnAppointment} >
           {this.state.business[0].availableAppointments.find(h => Object.keys(h)[0] === d
           )[d].map(c => { return <option value={c} className={c} onChange={this.makeAnAppointment}>{c} </option> })}
         </select>
       </div>)}
     </div>
-
   }
+
 
   render() {
     return (<div className="stores">
@@ -76,8 +76,6 @@ class Bessiness extends Component {
       })}
       <div className="appo">
         {this.state.displayAppo && this.state.business[0] ? this.func() : null}</div>
-
-
     </div>)
   }
 
