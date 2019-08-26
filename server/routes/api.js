@@ -138,6 +138,31 @@ router.post('/addCatgories', function (req, res) {
 })
 
 
+router.get('/searchByCatagory/:Catagory/:text', (req, res) => {
+    // let a = req.body
+
+    let Catagory = req.params.Catagory
+    let text = req.params.text
+    console.log(text, Catagory)
+    // if (Catagory === "emailType") {
+    //     Business.find({ [Catagory]: text }, function (err, x) {
+    //         res.send(x)
+    //     })
+    // }
+    // else {
+        Business.find({}, function (err, x) {
+            let result = []
+            // console.log(x)
+            x.map(u => u[Catagory].includes(text) || u[Catagory] === text ? result.push(u) : console.log(u[Catagory]))
+            console.log(result)
+            res.send(result)
+        })
+        // }
+    })
+
+
+
+
 router.post('/addnewbusiness', async function (req, res) {
     req.body.price = parseInt(req.body.price)
     req.body.averageAppointmentTime = parseInt(req.body.averageAppointmentTime)
