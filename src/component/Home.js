@@ -11,11 +11,16 @@ class Home extends Component {
         super()
         this.state = {
             loggedInUserName: undefined,
-            loggedInUserImg: undefined
+            loggedInUserImg: undefined,
+            isUdateCatgoreisFromProps: false
+
         }
     }
 
     componentDidMount = () => {
+        // if(this.state.isUdateCatgoreisFromProps){
+        //     this.setState({ Catgories : this.props.Catgories})
+        // } 
         this.getName()
         this.getImg()
     }
@@ -42,13 +47,114 @@ class Home extends Component {
         }
     }
 
+    slecetCatgory = () => {
+
+    }
+
+    updateusersText = (e) => {
+        let name = e.target.name
+        let text = e.target.value
+        // this.state[name] = 0
+        console.log(name, text)
+        this.setState({
+            [name]: text
+        }
+            , function () {
+                console.log(this.state)
+                // let input = this.state[name]
+                // console.log(name)
+                if (this.state.catagorySearch !== undefined) {
+                    // console.log("don't work")
+                    let catagorySearch = this.state.catagorySearch
+                    console.log(this.state.catagorySearch)
+                    let ifValue = true
+                    if (text === '') {
+                        ifValue = false
+                        // console.log(text, typeof text)
+                    } else {
+                        this.searchByCatgory(catagorySearch, text, ifValue)
+                    }
+                    ///////////////////////////////////////////////////////////////////////
+                } else { console.log("work") }
+                // console.log(typeof text, text.length)
+                text.length === 0 ? this.props.returnCatgories()  : console.log()
+            }
+            , function () { console.log(this.state) }
+        )
+    }
+
+    searchByCatgory = async (catagorySearch, text, ifValue) => {
+        // let obj = {
+        //   catagorySearch: catagorySearch,
+        //   text: text
+        // }
+        // if (ifValue === false) {
+        //     this.componentDidMount()
+        // } else {
+        console.log(catagorySearch, text, typeof text)
+        let res = await axios.get(`http://localhost:8000/searchByCatagory/${catagorySearch}/${text}`)
+        console.log(res.data)
+        this.setState({
+            resultByCatgory: res.data,
+            Catgories: undefined
+        }, function () {
+            console.log(this.state.Catgories, this.state.resultByCatgory)
+            // if (typeof text === "string" && text === "") {
+            //     console.log("gfdgfdbgkjbdkgbkdj")
+            //     this.setState({
+            //         users: this.state.data.slice(0, 20)
+            //     })
+            // }
+        })
+        this.props.reaseCatgories()
+    }
+    // }
+
+
+    resultByCatgory = () => {
+        if (this.state.resultByCatgory !== undefined) {
+            return this.state.resultByCatgory.map(r => <div>  <h2>{r.name}</h2>
+                <img src={r.img}></img>
+                <p>{r.description}</p>
+
+                <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>)
+        }
+    }
+
+    catagorySearch = (e) => {
+        let x = e.target.value
+        console.log(x)
+        this.setState({
+            // input: null,
+            catagorySearch: x
+        }
+            , function () { console.log(this.state.catagorySearch) }
+        )
+    }
+
 
 
     render() {
         return <div className="#f1f8e9 light-green lighten-5">
             <h1>Home</h1>
+            <button on={this.slecetCatgory}>
+                <select class="browser-default" onClick={this.catagorySearch}>
+                    <option value="Catgory" disabled selected>select a Category</option>
+                    <option value="name">bussnies name</option>
+                    <option value="rating">rating </option>
+                    {/* <option value="firstContact">First Contact</option> */}
+                    <option value="city">City</option>
+                    {/* <option value="sold">Sold</option> */}
+                    <option value="price">Price</option>
+                    <option value="days">Days</option>
+                </select>
+
+
+
+
+                <input name="input" type="text" value={this.state.fullName} onChange={this.updateusersText} placeholder="type here" /></button>
             <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
-            <img  className="circle responsive-img" src={this.state.loggedInUserImg} />
+            <img className="circle responsive-img" src={this.state.loggedInUserImg} />
             <div className="categories">
                 {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
                     <div className="category">
@@ -65,7 +171,10 @@ class Home extends Component {
                                 <Link to={`/Filter/${c.name}`} > {c.name} </Link>                            </div>
                         </div>
                     </div>
-                ) : null }
+                ) :
+                    this.resultByCatgory()
+                    // null
+                }
             </div>
             <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
