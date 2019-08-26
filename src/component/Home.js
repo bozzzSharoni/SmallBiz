@@ -50,7 +50,7 @@ class Home extends Component {
             <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
             <img width="200" height="200" className="circle responsive-img" src={this.state.loggedInUserImg} />
             <div className="categories">
-                {this.props.Catgories.map(c =>
+                {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
                     <div className="category">
 
                         <div class="card">
@@ -66,7 +66,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                )}
+                ) : null }
             </div>
             <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
