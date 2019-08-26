@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { googleMap, withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import moment from 'moment'
-import alertify from 'alertifyjs'
+import alertify from 'alertify.js'
 import Maps from './Maps';
 require('dotenv').config()
 
@@ -24,7 +24,7 @@ class Bessiness extends Component {
   componentDidMount = async () => {
     await this.getBusinesses()
   }
-  
+
   getBusinesses = async () => {
     let business = await axios.get(`http://localhost:8000/getbyname/${this.props.name}`)
     this.setState({ business: business.data }, function () {
@@ -42,7 +42,9 @@ class Bessiness extends Component {
     let object = { date: date, time: time, appointmentComfirm: appointmentComfirm }
     await axios.put(`http://localhost:8000/makeapp/${this.state.business[0]._id}/${this.props.state.user.uid}`, object)
     await this.makeRequestToMail(this.props.state.userEmail, time, date, this.state.business[0].name)
-    await alert("Congratulations!! the appointment is set, count to 3 and check your email :)")
+    await alertify
+      .alert("Congratulations!! the appointment is set, count to 3 and check your email :)")
+    // await alert("Congratulations!! the appointment is set, count to 3 and check your email :)")
     window.location.reload()
   }
 
@@ -73,24 +75,23 @@ class Bessiness extends Component {
     </div>
   }
 
-  
+
   render() {
-    return (<div className="stores">
     const MapWrapped = withScriptjs(withGoogleMap(Maps))
-    return (<div>
+    return (<div className="stores">
       {this.state.business.map(b => {
         return <div className="details">
           <h2>{b.name}</h2>
           <img src={b.img}></img>
           <p>{b.description}</p>
-          <div id="map" style={{ width: '50vw', height: '50vh' }}>
+          <div id="map" style={{ width: '40vw', height: '50vh' }}>
             <MapWrapped
               googleMapURL={
                 `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
                 // `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
-              // {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
+                // {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
                 // API_KEY || "AIzaSyAkkBgnQGlcbI0KSxTgsP24-HjAkXEuI9s&libraries"
-      }
+              }
               loadingElement={<div style={{ height: '100%' }} />}
               containerElement={<div style={{ height: '100%' }} />}
               mapElement={<div style={{ height: '100%' }} />}
