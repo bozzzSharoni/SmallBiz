@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from '../config/firebase'
 import { async } from 'q';
+import axios from 'axios'
+
 // import Checkbox from 'react-materialize/lib/Checkbox';
 // import Select from 'react-materialize/lib/Checkbox';
 
@@ -12,7 +14,7 @@ class OpenBisnnes extends Component {
         this.state = {
             newBusines: { location: { hight: 0, wight: 0 }, days: {} },
             ifLocation: 0,
-            stringInput: ["name", "email", "password", "description", "img", "owner", "payment", "country", "city", "address", "service"],
+            stringInput: ["name", "email", "password", "description", "owner", "payment", "country", "city", "address", "service"],
             numbersInput: ["price", "averageAppointmentTime"],
             daysList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             hoursList: ['0000', '0015', '0030', '0045', '0100', '0115', '0130', '0145', '0200', '0215', '0230', '0245', '0300', '0315',
@@ -23,9 +25,24 @@ class OpenBisnnes extends Component {
                 '1815', '1830', '1845', '1900', '1915', '1930', '1945', '2000', '2015', '2030', '2045', '2100', '2115', '2130',
                 '2145', '2200', '2215', '2230', '2245', '2300', '2315', '2330', '2345'],
             BesniessSetupHours: ["startTimeTillBrake", "brakeStartTime", "breakEndTime", "endTime"],
-            Catgories: ["Food", "Beauty", "Haircuts", "Cars", "Maintenance", "Medicine", "Travels", "Other"],
+            Catgories: [],
+            CatgoriesOn: false
         }
     }
+
+
+    async componentDidMount() {
+        const res = await axios.get('http://localhost:8000/Catgories')
+        let Catgories = res.data[0].Catgories
+        // Catgories = Object.keys(Catgories)
+        console.log(Catgories)
+
+        this.setState({
+            Catgories: Catgories , CatgoriesOn : true
+        })
+        console.log(this.state.Catgories)
+    }
+
 
     updeBesniiesText = (e) => {
         let id = e.target.id
@@ -53,8 +70,13 @@ class OpenBisnnes extends Component {
     }
 
     createNewBussnies = () => {
-        console.log(this.state.newBusines)
-        let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + this.state.ifLocation + 4
+        //    let  newBusines = { ...this.state.newBusines }
+        //    console.log(this.state.img)
+        //     newBusines.imge = this.state.img
+        console.log(this.state.newBusines.img)
+        // console.log(newBusines[image])
+        let imageLength = this.state.newBusines.img === undefined ? 0 : 1
+        let length = this.state.stringInput.length + this.state.numbersInput.length + this.state.BesniessSetupHours.length + this.state.ifLocation + imageLength + 4
         console.log(length)
         console.log(Object.keys(this.state.newBusines).length)
         if (Object.keys(this.state.newBusines).length === length || Object.keys(this.state.newBusines).length === length - 1) {
@@ -137,6 +159,55 @@ class OpenBisnnes extends Component {
             alert("so we will uesed on your adrees that you fill in before")
         }
     }
+    // addImg = (e) =>{
+    //     e = e.target.parentElement
+    //     console.log(e)
+    // }
+
+    handleImage = (e) => {
+        console.log("jhgchjhkjkljkhg")
+        if (e.target.files[0]) {
+            const image = e.target.files[0]
+            this.setState({
+                uploadedImage: image
+            })
+        }
+    }
+
+    handleUpload = () => {
+        console.log("kjgjyfjukguyv")
+        const { uploadedImage } = this.state
+        if (this.state.uploadedImage === null) {
+            alert('Please pick a valid image!')
+        }
+        else {
+            const uploadTask = firebase.storage().ref(`images/${uploadedImage.name}`).put(uploadedImage)
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // progress function
+                },
+                (error) => {
+                    console.log(error)
+                },
+                async () => {
+                    await firebase.storage().ref('images').child(uploadedImage.name).getDownloadURL().then(url => {
+                        console.log(url)
+                        let newBusines = { ...this.state.newBusines }
+                        newBusines.img = url
+                        this.setState({
+                            newBusines: newBusines,
+                            img: url
+                        })
+                        console.log(this.state.img)
+
+                    })
+                }
+            )
+        }
+        console.log(this.state)
+    }
+
+
 
     render() {
         let Catgories = this.state.Catgories
@@ -165,21 +236,26 @@ class OpenBisnnes extends Component {
                 <span></span>
             </label>)}
             <h5> select work hours </h5>
+            {this.state.CatgoriesOn ?
+                <div>
+                    <label>Busniess Catgiry Select</label>
+                    <datalist class="browser-default" name="field" onChange={this.updeBesniiesText}>
+                        <option value="" disabled selected>Choose your Catgory</option>
+                        {Catgories.map(c => <option value={c.name}> {c.name}</option>)}
+                    </datalist>
 
-            <label>Busniess Catgiry Select</label>
-            <datalist class="browser-default" name="field" onChange={this.updeBesniiesText}>
-                <option value="" disabled selected>Choose your Catgory</option>
-                {Catgories.map(c => <option value={c}> {c}</option>)}
-            </datalist>
+                    <div>
+                        Catgory: <datalist id="searchCatgory" className='select-input' name="field" onChange={this.updeBesniiesText}>
+                            {Catgories.map(c => <option value={c.name}>{c.name} </option>)}
+                        </datalist>
+                        <input autoComplete="on" list="searchCatgory" name="field"
+                            value={this.state.newBusines.field}
+                            placeholder='Catgory' onChange={this.updeBesniiesText} className='select-input' />
+                    </div> </div>
 
-            <div>
-                Catgory: <datalist id="searchCatgory" className='select-input' name="field" onChange={this.updeBesniiesText}>
-                    {Catgories.map(c => <option value={c}>{c} </option>)}
-                </datalist>
-                <input autoComplete="on" list="searchCatgory" name="field"
-                    value={this.state.newBusines.field}
-                    placeholder='Catgory' onChange={this.updeBesniiesText} className='select-input' />
-            </div>
+
+                : null
+            }
 
             {/* <div>
                     Client: <datalist id="searchClient" className='select-input' onChange={this.updateClientNameState}>
@@ -202,6 +278,11 @@ class OpenBisnnes extends Component {
                         placeholder='Hours' onChange={this.updeBesniiesText} className='select-input' />
                 </div>
             )}
+            <label>Photo</label>
+            <div>
+                <input id="file" type="file" onChange={this.handleImage} />
+                <button onClick={this.handleUpload}> Upload Image</button>
+            </div>
 
             <br></br>
             <button onClick={this.getGeoLocation}> do you want us to get your location for your busniines </button>

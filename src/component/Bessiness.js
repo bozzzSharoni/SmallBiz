@@ -80,7 +80,8 @@ class Bessiness extends Component {
       {days.map(d => <div className={d}>    <h5>{d} {moment(d).format('dddd')} </h5>
         <select class="browser-default" name={d} onChange={this.makeAnAppointment} >
           {/* <select> */}
-          {this.state.business[0].availableAppointments.find(h => Object.keys(h)[0] === d)[d].map(c => { return <option value={c} className={c} onChange={this.makeAnAppointment}>{c} </option> })}
+          {this.state.business[0].availableAppointments.find(h => Object.keys(h)[0] === d
+            )[d].map(c => { return <option value={c} className={c} onChange={this.makeAnAppointment}>{c} </option> })}
           {/* </select> */}
         </select>
       </div>)}
