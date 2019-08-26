@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { googleMap, withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import moment from 'moment'
+import Maps from './Maps';
 
 class Bessiness extends Component {
   constructor() {
@@ -101,30 +103,30 @@ class Bessiness extends Component {
 
 
   render() {
-    // let x = this.state.business[0]
-
+    const MapWrapped = withScriptjs(withGoogleMap(Maps))
     return (<div>
-
       {/* {x ? console.log(this.state.business[0].availableAppointments.slice(1, 8)[0]) : null} */}
       {this.state.business.map(b => {
         return <div>
           <h2>{b.name}</h2>
           <img src={b.img}></img>
           <p>{b.description}</p>
+          <div id="map" style={{ width: '100vw', height: '100vh' }}>
+            <MapWrapped
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${"AIzaSyAkkBgnQGlcbI0KSxTgsP24-HjAkXEuI9s&libraries"
+                }`}
+                // process.env.REACT_APP_GOOGLE_KEY
+              loadingElement={<div style={{ height: '100%' }} />}
+              containerElement={<div style={{ height: '100%' }} />}
+              mapElement={<div style={{ height: '100%' }} />}
+            />
+          </div>
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       {this.state.displayAppo && this.state.business[0] ? this.func() : null}
-      {/* 
-      //   return <div>
-      //     <span>{a.regularDay[0]}</span>
-
-
-      //   </div>
-      // }) : <div>hi</div>} */}
     </div>)
   }
+ }
 
-
-}
-
-export default Bessiness;
+ export default Bessiness;
+ 
