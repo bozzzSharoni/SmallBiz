@@ -103,7 +103,7 @@ getCatgoties = async function () {
         businesses.forEach(b =>
             obj1[b.field] = { name: b.field, img: b.img, description: b.description }
         )
-        for ( let i in obj1 ){
+        for (let i in obj1) {
             // let obj2 =  obj1[i] 
             obj.Catgories.push(obj1[i])
         }
@@ -143,13 +143,45 @@ router.get('/searchByCatagory/:Catagory/:text', (req, res) => {
 
     let Catagory = req.params.Catagory
     let text = req.params.text
-    console.log(text, Catagory)
-    // if (Catagory === "emailType") {
-    //     Business.find({ [Catagory]: text }, function (err, x) {
-    //         res.send(x)
-    //     })
-    // }
-    // else {
+    if (Catagory === "rating") {
+        Business.find({}, function (err, x) {
+            let result = []
+            // console.log(x)
+            x.map(u => u[Catagory] < parseInt(text) ? result.push(u) : console.log(u[Catagory]))
+            console.log(result)
+            res.send(result)
+        })
+    }
+    else if (Catagory === "days") {
+        Business.find({}, function (err, x) {
+            // console.log(x)
+            let result = []
+            for (let i of x  ){
+                let days = Object.keys(i[Catagory])
+                days.map( d => d.includes(text) || d === text ? result.push(i) : console.log(d))
+            }
+            console.log(result)
+            res.send(result)
+        })
+    }
+
+    else if (Catagory === "price") {
+        Business.find({}, function (err, x) {
+            let result = []
+            // console.log(x)
+            x.map(u => u[Catagory] > parseInt(text) ? result.push(u) : console.log(u[Catagory]))
+            console.log(result)
+            res.send(result)
+        })
+    } else {
+
+        console.log(text, Catagory)
+        // if (Catagory === "emailType") {
+        //     Business.find({ [Catagory]: text }, function (err, x) {
+        //         res.send(x)
+        //     })
+        // }
+        // else {
         Business.find({}, function (err, x) {
             let result = []
             // console.log(x)
@@ -157,8 +189,9 @@ router.get('/searchByCatagory/:Catagory/:text', (req, res) => {
             console.log(result)
             res.send(result)
         })
-        // }
-    })
+    }
+    // }
+})
 
 
 
