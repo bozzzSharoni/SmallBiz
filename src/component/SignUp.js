@@ -18,8 +18,6 @@ class SignUp extends Component {
       console.log(error)
     })
     this.props.saveUser()
-
-    // this.props.getName()
   }
 
 

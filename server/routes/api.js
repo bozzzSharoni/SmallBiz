@@ -56,7 +56,7 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
     }
     new Appointment(obj).save()
 
- })
+})
 
 
 newDay = () => {
@@ -158,21 +158,21 @@ router.post('/addnewbusiness', async function (req, res) {
     let b1 = new Business(req.body)
     let dailySchedule = await getDailySchedule(req.body)
     let daysOfWork = Object.keys(b1.days)
-     console.log( daysOfWork)
+    console.log(daysOfWork)
     let obj = {}
     let x = 0
     for (let i = 0; x < 10; i++) {
-    // console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
+        // console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
         if (daysOfWork.find(d => d === moment((moment().add(i, 'day').format('L'))).format('dddd'))) {
             obj[moment().add(i, 'day').format('L')] = dailySchedule
-            console.log(moment((moment().add(i, 'day').format('L'))).format('dddd'),"is in")
+            console.log(moment((moment().add(i, 'day').format('L'))).format('dddd'), "is in")
             x++
-        } 
+        }
     }
-    
+
     b1.availableAppointments = [
         { regularDay: dailySchedule },
-      obj
+        obj
     ]
     b1.save()
     res.send('succes!')

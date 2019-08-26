@@ -1,13 +1,14 @@
+    
 body {
   font-family: Montserrat;
 }
 
 .nav-wrapper li:hover {
-  background-color: #f1f8e9;
+  background-color: aliceblue;
   } 
 
 .nav-wrapper li:active {
-  background-color: #e53935;
+  background-color: white;
 } 
 
 .categories {
@@ -19,4 +20,12 @@ body {
 .category {
 display: grid;
 grid-template-columns: 3fr 1fr;
+/* -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75); */
+}
+
+#map {
+  height: 400px;
+  width: 100%;
 }

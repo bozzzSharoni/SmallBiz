@@ -14,6 +14,22 @@ class Bessiness extends Component {
 
   componentDidMount = async () => {
     await this.getBusinesses()
+    const script = document.createElement("script");
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBrxb-nSV0JL1UtoxXtbLIHFuE4p3EnliY&callback=initMap";
+    script.async = true;
+    const script2 = document.createElement("script");
+    script2.innerHTML = `
+    function initMap() {
+      let options = {
+        zoom: 8,
+        center: {
+          let: 42.3601, lng: -71.0589
+        }
+
+      let map = new google.maps.Map(document.getElementById('map'),options) {
+    }`
+    document.getElementById("oneBusiness").appendChild(script2)
+    document.getElementById("oneBusiness").appendChild(script)
   }
 
   getBusinesses = async () => {
@@ -70,14 +86,14 @@ class Bessiness extends Component {
 
 
   render() {
-
-    return (<div>
+    return (<div id="oneBusiness">
 
       {this.state.business.map(b => {
         return <div>
           <h2>{b.name}</h2>
           <img src={b.img}></img>
           <p>{b.description}</p>
+          <div id="map"></div>
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       {this.state.displayAppo && this.state.business[0] ? this.func() : null}
