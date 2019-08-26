@@ -19,7 +19,7 @@ class App extends Component {
     super()
     this.state = {
 
- 
+
       name: '',
       phone: '',
       gender: 'male',
@@ -34,17 +34,26 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount = (x) => {
     this.authListener()
-    const res = await axios.get('http://localhost:8000/Catgories')
-    let Catgories = res.data[0].Catgories
-    // Catgories = Object.keys(Catgories)
-    console.log(Catgories)
+    this.returnCatgories()
+  }
 
-    this.setState({
-      Catgories: Catgories
-    })
-    console.log(this.state.Catgories)
+  returnCatgories = async () => {
+    const res = await axios.get('http://localhost:8000/Catgories')
+    if (res.data[0].Catgories === undefined) {
+      this.componentDidMount()
+    } else {
+
+      let Catgories = res.data[0].Catgories
+      // Catgories = Object.keys(Catgories)
+      console.log(Catgories)
+
+      this.setState({
+        Catgories: Catgories
+      })
+      console.log(this.state.Catgories)
+    }
   }
 
   saveNewUserToDb = async () => {
@@ -93,7 +102,7 @@ class App extends Component {
 
   }
   handleImage = (e) => {
-console.log("jhgchjhkjkljkhg")
+    console.log("jhgchjhkjkljkhg")
     if (e.target.files[0]) {
       const image = e.target.files[0]
       this.setState({
@@ -150,6 +159,10 @@ console.log("jhgchjhkjkljkhg")
     })
   }
 
+  reaseCatgories = () => {
+    this.setState({ Catgories: undefined })
+  }
+
   render() {
     return (
       <Router>
@@ -168,17 +181,15 @@ console.log("jhgchjhkjkljkhg")
         <div>
           {/* {this.state.user ? <Home Catgories={this.state.Catgories} /> : <SignUp />} */}
         </div>
-        <Route path="/" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} getName={this.getName} />} />
-        <Route path="/Home" render={() => <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} />} />
+        <Route path="/" exact render={() => this.state.user ? <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <User handle={this.handleChange} email={this.state.email} password={this.state.password} getName={this.getName} />} />
+        <Route path="/Home" render={() => <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} />} />
         <Route path="/About" render={() => <About state={this.state} />} />
         <Route path="/Catgory" render={() => <Catgoty />} />
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness state={this.state} name={match.params.BesniessName} />} />
-        <Route path="/Signup" exact render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} handleImg={this.handleImage} upload={this.handleUpload} />} />
+        <Route path="/Signup" exact render={() => this.state.user ? <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} handleImg={this.handleImage} upload={this.handleUpload} />} />
 
-        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes Catgories={this.state.Catgories} saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
-
-
+        <Route path="/OpenBisnnes" render={() => this.state.user ? <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes Catgories={this.state.Catgories} saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
       </Router >
 
     );

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { googleMap, withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import moment from 'moment'
 import alertify from 'alertifyjs'
+import Maps from './Maps';
+require('dotenv').config()
+
+const API_KEY = process.env.API_KEY
+
+require('dotenv').config()
+
 
 class Bessiness extends Component {
   constructor() {
@@ -16,7 +24,7 @@ class Bessiness extends Component {
   componentDidMount = async () => {
     await this.getBusinesses()
   }
-
+  
   getBusinesses = async () => {
     let business = await axios.get(`http://localhost:8000/getbyname/${this.props.name}`)
     this.setState({ business: business.data }, function () {
@@ -56,6 +64,7 @@ class Bessiness extends Component {
     return <div className="anim">
       {days.map(d => <div className={d} >
         <h6>{d} {moment(d).format('dddd')} </h6>
+
         <select class="browser-default" name={d} onChange={this.makeAnAppointment} >
           {this.state.business[0].availableAppointments.find(h => Object.keys(h)[0] === d
           )[d].map(c => { return <option value={c} className={c} onChange={this.makeAnAppointment}>{c} </option> })}
@@ -64,22 +73,35 @@ class Bessiness extends Component {
     </div>
   }
 
-
+  
   render() {
     return (<div className="stores">
+    const MapWrapped = withScriptjs(withGoogleMap(Maps))
+    return (<div>
       {this.state.business.map(b => {
         return <div className="details">
           <h2>{b.name}</h2>
           <img src={b.img}></img>
           <p>{b.description}</p>
+          <div id="map" style={{ width: '50vw', height: '50vh' }}>
+            <MapWrapped
+              googleMapURL={
+                `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
+                // `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
+              // {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
+                // API_KEY || "AIzaSyAkkBgnQGlcbI0KSxTgsP24-HjAkXEuI9s&libraries"
+      }
+              loadingElement={<div style={{ height: '100%' }} />}
+              containerElement={<div style={{ height: '100%' }} />}
+              mapElement={<div style={{ height: '100%' }} />}
+            />
+          </div>
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       <div className="appo">
         {this.state.displayAppo && this.state.business[0] ? this.func() : null}</div>
     </div>)
   }
-
-
 }
 
 export default Bessiness;

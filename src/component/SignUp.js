@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import firebase from '../config/firebase'
+import Button from '@material-ui/core/Button'
+import indigo from '@material-ui/core/colors/indigo'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
+const primary = indigo[500]
+const secondary = indigo[50]
 class SignUp extends Component {
   constructor() {
     super()
@@ -56,7 +61,7 @@ class SignUp extends Component {
           <label>Password</label>
           <input placeholder='Password' value={this.props.state.password} onChange={this.props.handle} type='password' name='password' />
 
-          <button onClick={this.signup} className='btn btn-success'><Link to='/'>Signup</Link></button>
+          <Button href="/" onClick={this.signup} color="primary" variant="contained">Signup</Button>
         </div>
       </div>
     </div>
