@@ -17,14 +17,14 @@ class About extends Component {
       <div className="row">
         <div id="whoWeR" className="col s3 left">
           <div className="card panel grey">
-            <span className="card-title white-text text-darken-4">Who we are?</span>
+            <span className="card-title white-text text-darken-4">Who we are</span>
             <blockquote>
               <p>Smallbiz is a platform for connecting small business owners with clients.</p>
               <p>With our platform, you can assign appointments, message business owners and get discounts!</p>
             </blockquote>
           </div>
         </div>
-        <div className="col s3 right">
+        <div id="firststimg"className="col s3 right">
           <div className="card">
             <div className="card-image">
               <img src="https://www.metasource.co/wp-content/uploads/2017/11/Startup-tech-team2-800x400.jpg"></img>
@@ -57,7 +57,7 @@ class About extends Component {
             <span className="card-title white-text text-darken-4">"Wow your website is great! How do I signup?"</span>
             <blockquote>
               <p>Click the "Signup" button below and fill in the form.</p>
-              <p className="btn pulse">↓</p>
+              <p id="arrow1"className="btn pulse">↓</p>
               <p>{this.props.state.user ? <Button className="black-text text-darken-1" href='/' >Sign-Up</Button> : <Button className="black-text text-darken-1" href='/Signup'>Sign-Up</Button>}</p>
             </blockquote>
           </div>
@@ -77,7 +77,7 @@ class About extends Component {
             <span className="card-title white-text text-darken-4">"But wait! I don't want a regular account! How do I sign up as a new business?"</span>
             <blockquote>
               <p>What a great question! Click on the "Open your Business Page" button below and enjoy an endless stream of clients for the rest of your life!</p>
-              <p className="btn pulse">↓</p>
+              <p id="arrow2" className="btn pulse">↓</p>
               <p><Button className="black-text text-darken-1" href="/OpenBisnnes">Open your Business Page</Button></p>
             </blockquote>
           </div>
