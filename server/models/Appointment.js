@@ -9,7 +9,7 @@ const AppointmentSchema = new Schema({
     date: String,
     time: String,
     rating: Number,
-    didGetNotification: Boolean,
+    appointmentComfirm: Boolean,
 })
 
 const Appointment = mongoose.model("Appointment", AppointmentSchema)

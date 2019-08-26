@@ -19,29 +19,7 @@ class App extends Component {
     super()
     this.state = {
 
-      Catgories: [
-        {
-          name: "Beauty",
-          img: "https://media.self.com/photos/57e00e471db118765d302bdd/2:1/pass/sub-channel-beauty_makeup.jpg"
-        },
-        {
-          name: "Travels",
-          img: "https://africaslist.com/wp-content/uploads/tours.jpg"
-        },
-        {
-          name: "Maintenance",
-          img: "http://volcone.com/wp-content/uploads/2017/06/Website-maintenance.jpg"
-        },
-        {
-          name: "Haircuts",
-          img: "https://www.hair.com/-/media/project/loreal/brand-sites/salonsecret/americas/us/article-pictures/hard-part-haircut-header-new.jpg?w=350&hash=413CEB7D6780E3A7D7C7A76B8CAF9796074ABB9C"
-        },
-        {
-          name: "Cars",
-          img: "https://amp.businessinsider.com/images/592f4169b74af41b008b5977-750-563.jpg",
-        }
-      ],
-
+ 
       name: '',
       phone: '',
       gender: 'male',
