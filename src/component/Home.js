@@ -79,7 +79,7 @@ class Home extends Component {
                     ///////////////////////////////////////////////////////////////////////
                 } else { console.log("work") }
                 // console.log(typeof text, text.length)
-                text.length === 0 ? this.props.returnCatgories()  : console.log()
+                text.length === 0 ? this.props.returnCatgories() : console.log()
             }
             , function () { console.log(this.state) }
         )
@@ -117,24 +117,24 @@ class Home extends Component {
         if (this.state.resultByCatgory !== undefined) {
             return this.state.resultByCatgory.map(b => {
                 return <div className="row">
-                  <div className="col s12 m7">
-                    <div className="card medium">
-                      <div className="card-image">
-                        <img src={b.img}></img>
-                        <span className="card-title">{b.name}</span>
-                      </div>
-                      <div className="card-content">
-                        <p> {b.description}
-                        </p>
-                      </div>
-                      <div className="card-action">
-                        <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
-                      </div>
+                    <div className="col s12 m7">
+                        <div className="card medium">
+                            <div className="card-image">
+                                <img src={b.img}></img>
+                                <span className="card-title">{b.name}</span>
+                            </div>
+                            <div className="card-content">
+                                <p> {b.description}
+                                </p>
+                            </div>
+                            <div className="card-action">
+                                <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-      
+
                 </div>
-              }  )
+            })
         }
     }
 
@@ -152,13 +152,13 @@ class Home extends Component {
 
 
     render() {
-        return <div className="#f1f8e9 light-green lighten-5">
+        return     <div className="#f1f8e9 light-green lighten-5">
             <h1>Home</h1>
             <button on={this.slecetCatgory}>
                 <select class="browser-default" onClick={this.catagorySearch}>
-                    <option value="Catgory" disabled selected>select a Category</option>
-                    <option value="name">bussnies name</option>
-                    <option value="rating">rating </option>
+                    <option value="Catgory" disabled selected>Select a Category</option>
+                    <option value="name">Business Name</option>
+                    <option value="rating">Rating </option>
                     {/* <option value="firstContact">First Contact</option> */}
                     <option value="city">City</option>
                     {/* <option value="sold">Sold</option> */}
@@ -168,37 +168,39 @@ class Home extends Component {
 
 
 
+                <div className="userDetails"> <button>
+                    <input name="input" type="text" value={this.state.input} onChange={this.updateusersText} placeholder="type here" /></button>
+                    <h6> {this.state.loggedInUserName !== undefined ? "Welcome back " + this.state.loggedInUserName : null} </h6>
+                    <img width="100" height="100" className="circle responsive-img" src={this.state.loggedInUserImg} />
+                </div>
 
-                <input name="input" type="text" value={this.state.input} onChange={this.updateusersText} placeholder="type here" /></button>
-            <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
-            <img width="200" height="200" className="circle responsive-img" src={this.state.loggedInUserImg} />
-            <div className="categories">
-                {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
-                    <div className="category">
+                <div className="categories">
+                    {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
+                        <div className="category">
 
-                        <div class="card">
-                            <div class="card-image">
-                                <img src={c.img}></img>
-                                <span class="card-title">{c.name}</span>
-                            </div>
-                            <div class="card-content">
-                                <p>{c.description}</p>
-                            </div>
-                            <div class="card-action">
-                                <Link to={`/Filter/${c.name}`}> {c.name} </Link>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src={c.img}></img>
+                                    <span class="card-title">{c.name}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p>{c.description}</p>
+                                </div>
+                                <div class="card-action">
+                                    <Link to={`/Filter/${c.name}`}> {c.name} </Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) :
-                    this.resultByCatgory()
-                    // null
-                }
-            </div>
-            <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
-            {/* <Maps /> */}
-        </div >
-    }
-
-}
-
-export default Home;
+                    ) :
+                        this.resultByCatgory()
+                        // null
+                    }
+                </div>
+                <button className="btn waves-effect waves-light" id="logout" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
+                {/* <Maps /> */}
+        {/* </div > */}
+            }
+        
+        }
+        
+        export default Home;
