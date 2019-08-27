@@ -59,9 +59,11 @@ class Bessiness extends Component {
   }
 
   func = () => {
+    
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
-    let length = days.length
+    let length = days.length-1
     days = days.slice(1, length)
+    console.log(days)
     return <div className="anim">
       {days.map(d => <div className={d} >
         <h6>{d} {moment(d).format('dddd')} </h6>
@@ -84,8 +86,8 @@ class Bessiness extends Component {
           <h2>{b.name}</h2>
           <img src={b.img} class="busImg"></img>
           <p>{b.description}</p>
-          <p> address : {b.address}</p>
-          <p> price : {b.price} NIS </p>
+          <p> Address : {b.city}, {b.address}</p>
+          <p> Price : {b.price} ₪ </p>
           {/* <div id="map" style={{ width: '0vw', height: '0vh' }}> */}
             {/* <MapWrapped
               googleMapURL={
