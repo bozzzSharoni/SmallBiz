@@ -84,9 +84,8 @@ class Bessiness extends Component {
     window.open(` https://earth.google.com/web/search/${b.address.replace(" ","%20") + ","+ b.city.replace(" ","%20")}@${b.location.hight},${b.location.wight},34.10008876a,4820.53237024d,35y,0.00000001h,45.00123153t,-0r/data=CigiJgokCYXl_8M40D9AEbv3D5wdxT9AGUKWKNz_WEFAIe-0dx4IUEFA `) 
   }
 
-
   render() {
-    const MapWrapped = withScriptjs(withGoogleMap(Maps))
+    // const MapWrapped = withScriptjs(withGoogleMap(Maps))
     return (<div className="stores">
       {this.state.business.map(b => {
         return <div className="details">
