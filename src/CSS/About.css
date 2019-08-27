@@ -16,3 +16,36 @@ img.bg {
     margin-bottom: 30px;
     color: rgb(255, 255, 255);
 }
+
+#firstimg{
+    -webkit-box-shadow: 15px 19px 164px -37px rgba(0,0,0,0.5);
+    -moz-box-shadow: 15px 19px 164px -37px rgba(0,0,0,0.5);
+    box-shadow: 15px 19px 164px -37px rgba(0,0,0,0.5);
+}
+
+#whoWeR, #howDoesItWork, #Signup,#OpenBusiness{
+    font-family: 'Playfair Display', serif;
+}
+
+
+
+#OpenBusiness span{
+    font-size: 140%;
+}
+
+#Signup span{
+    font-size: 140%;
+}
+
+#howDoesItWork span{
+    font-size: 140%;
+}
+
+blockquote{
+    font-size: 100%
+}
+
+#arrow1, #arrow2{
+    font-size: 200%
+}
+
