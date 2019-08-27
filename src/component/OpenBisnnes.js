@@ -130,7 +130,7 @@ class OpenBisnnes extends Component {
     }
 
     getGeoLocation = () => {
-        let r = window.confirm("it will get your busniess location only if you in your busniies")
+        let r = window.confirm("Do you agree?")
         if (r == true) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -217,7 +217,7 @@ class OpenBisnnes extends Component {
         let BesniessSetupHours = this.state.BesniessSetupHours
         let hoursList = this.state.hoursList
         return <div>Helle this is where you are gonna put your besniess data and wait for us to confferm your request
-              <h5> Add New Besniess </h5>
+              <h5> Add New Business </h5>
 
             {stringInput.map(i => <label>{i} <input name={`${i}`} type="text" value={this.state.newBusines[i]} onChange={this.updeBesniiesText} placeholder={`${i}`} /> </label>)}
             <h5>numbers</h5>
@@ -274,8 +274,8 @@ class OpenBisnnes extends Component {
             </div>
 
             <br></br>
-            <button onClick={this.getGeoLocation}> do you want us to get your location for your busniines </button>
-            <button onClick={this.createNewBussnies}>Add New User <i class="material-icons right">send</i> </button>
+            <button onClick={this.getGeoLocation}> Do you want us to get your location for your business </button>
+            <button onClick={this.createNewBussnies}>Add New Business <i class="material-icons right">send</i> </button>
 
         </div>
     }

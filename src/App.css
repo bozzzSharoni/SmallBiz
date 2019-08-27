@@ -59,6 +59,10 @@ input {
   }
 }
 
+.appo {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
 .anim{
 animation-name: show;
 animation-duration: 2.5s;
@@ -69,4 +73,21 @@ animation-duration: 2.5s;
   -moz-box-shadow: -1px 5px 51px 2px rgba(231,166,26,1);
   box-shadow: -1px 5px 51px 2px rgba(231,166,26,1);
   transition: 2s;
+}
+
+.userDetails{
+  position: absolute;
+  top:100px;
+  right: 20px;
+}
+
+#logout{
+  position: absolute;
+  top: 150px;
+  right: 20px;
+}
+
+.busImg{
+  height: 295px;
+  width: 563px;
 }
