@@ -30,21 +30,20 @@
         "brakeStartTime": 12.5,
         "breakEndTime": 13.5,
         "endTime": 17
-
-    },{
+    },
+    {
         "_id": {
-          "$oid": "5d641bc8571ba24cd8f8b568"
+            "$oid": "5d641bc8571ba24cd8f8b568"
         },
         "days": {
-          "Sunday": true,
-          "Tuesday": true,
-          "Wednesday": true,
-          "Thursday": true
+            "Sunday": true,
+            "Tuesday": true,
+            "Wednesday": true,
+            "Thursday": true
         },
- 
         "location": {
-          "hight": 32.062840699999995,
-          "wight": 34.7734829
+            "hight": 32.062840699999995,
+            "wight": 34.7734829
         },
         "name": "Dor Ahrak",
         "email": "dorajrak@gmail.com",
@@ -66,7 +65,6 @@
         "img": "https://firebasestorage.googleapis.com/v0/b/smallbiz-6c996.appspot.com/o/images%2FLa-Barbershop.jpg?alt=media&token=a40f4002-322c-4527-afaa-62413dc6e502",
         "__v": 0,
         "rating": 10
-      }
     },
     {
         "_id": {
