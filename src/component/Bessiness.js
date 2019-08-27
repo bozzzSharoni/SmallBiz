@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { googleMap, withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 import moment from 'moment'
-import alertify from 'alertifyjs'
+import alertify from 'alertify.js'
 import Maps from './Maps';
 require('dotenv').config()
 
@@ -59,9 +59,9 @@ class Bessiness extends Component {
   }
 
   func = () => {
-    
+
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
-    let length = days.length-1
+    let length = days.length - 5
     days = days.slice(1, length)
     console.log(days)
     return <div className="anim">
@@ -89,7 +89,7 @@ class Bessiness extends Component {
           <p> Address : {b.city}, {b.address}</p>
           <p> Price : {b.price} ₪ </p>
           {/* <div id="map" style={{ width: '0vw', height: '0vh' }}> */}
-            {/* <MapWrapped
+          {/* <MapWrapped
               googleMapURL={
                 `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
                 // `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
