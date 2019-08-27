@@ -171,11 +171,13 @@ class Home extends Component {
 
 
 
+
                 <input name="input" type="text" value={this.state.fullName} onChange={this.updateusersText} placeholder="type here" /></button>
             <div className="userDetails">
                 <h6> {this.state.loggedInUserName !== undefined ? "Welcome back " + this.state.loggedInUserName : null} </h6>
                 <img width="100" height="100" className="circle responsive-img" src={this.state.loggedInUserImg} />
             </div>
+
             <div className="categories">
                 {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
                     <div className="category">
