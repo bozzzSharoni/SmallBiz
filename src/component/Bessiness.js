@@ -59,9 +59,11 @@ class Bessiness extends Component {
   }
 
   func = () => {
+
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
-    let length = days.length
+    let length = days.length - 5
     days = days.slice(1, length)
+    console.log(days)
     return <div className="anim">
       {days.map(d => <div className={d} >
         <h6>{d} {moment(d).format('dddd')} </h6>
@@ -73,50 +75,42 @@ class Bessiness extends Component {
       </div>)}
     </div>
   }
-  googleMapLocation = () =>{
+  googleMapLocation = () => {
     let b = this.state.business[0]
-    window.open(`http://google.com/maps/search/${b.city+ " " + b.address}%E2%80%AD/@${b.location.hight},${b.location.wight}`)
+    window.open(`http://google.com/maps/search/${b.city + " " + b.address}%E2%80%AD/@${b.location.hight},${b.location.wight}`)
   }
 
-  googleEarthLocation = () =>{
+  googleEarthLocation = () => {
     let b = this.state.business[0]
 
-    window.open(` https://earth.google.com/web/search/${b.address.replace(" ","%20") + ","+ b.city.replace(" ","%20")}@${b.location.hight},${b.location.wight},34.10008876a,4820.53237024d,35y,0.00000001h,45.00123153t,-0r/data=CigiJgokCYXl_8M40D9AEbv3D5wdxT9AGUKWKNz_WEFAIe-0dx4IUEFA `) 
+    window.open(` https://earth.google.com/web/search/${b.address.replace(" ", "%20") + "," + b.city.replace(" ", "%20")}@${b.location.hight},${b.location.wight},34.10008876a,4820.53237024d,35y,0.00000001h,45.00123153t,-0r/data=CigiJgokCYXl_8M40D9AEbv3D5wdxT9AGUKWKNz_WEFAIe-0dx4IUEFA `)
   }
 
   render() {
     // const MapWrapped = withScriptjs(withGoogleMap(Maps))
+    console.log(this.state.business)
     return (<div className="stores">
       {this.state.business.map(b => {
         return <div className="details">
           <h2>{b.name}</h2>
           <img src={b.img}></img>
-          <p>{b.description}</p> 
-          {/* <h1>{b.location.hight} {b.location.wight} </h1> */}
-          <ul>{b.city +" " + b.address}</ul> <br></br>
-          <a onClick={this.googleMapLocation}  href={`http://localhost:3000/SmallBizz/${b.name}`}
+          <p>{b.description}</p>
+          <p> Address : {b.city}, {b.address}</p>
+          <p> Price : {b.price} ₪ </p>
+          <ul>{b.city + " " + b.address}</ul> <br></br>
+          <a onClick={this.googleMapLocation} href={`http://localhost:3000/SmallBizz/${b.name}`}
           // {`https://www.google.com/maps/place/${b.name}%E2%80%AD/@${b.location.hight},${b.location.wight},12.49z/data=!4m5!3m4!1s0x151d4ca6193b7c1f:0xc1fb72a2c0963f90!8m2!3d${b.location.hight}!4d${b.location.wight}`}
           > See Google Map Location for {b.name} </a>  <br></br><br></br>
           <a onClick={this.googleEarthLocation} href={`http://localhost:3000/SmallBizz/${b.name}`}
           // {`https://earth.google.com/web/search/${b.address.replace(" ","%20") + ","+ b.city.replace(" ","%20")},+%d7%99%d7%a9%d7%a8%d7%90%d7%9c/@${b.location.hight},${b.location.wight},34.10008876a,4820.53237024d,35y,0.00000001h,45.00123153t,-0r/data=CigiJgokCUxm5g1E0D9AEbOQ9uUoxT9AGfLygoz_WEFAIZR2uc0HUEFA`}      
           > See Location for {b.name} </a> <br></br><br></br>
-          {/* <div id="map" style={{ width: '0vw', height: '0vh' }}> */}
-          {/* <MapWrapped
-              googleMapURL={
-                `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
-                // `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
-                // {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
-                // API_KEY || "AIzaSyAkkBgnQGlcbI0KSxTgsP24-HjAkXEuI9s&libraries"
-              }
-              loadingElement={<div style={{ height: '100%' }} />}
-              containerElement={<div style={{ height: '100%' }} />}
-              mapElement={<div style={{ height: '100%' }} />}
-            /> */}
+  
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a>
         </div>
 
+        {/* </div> */ }
       })}
-<div class="devsite-rating-stars"><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 1 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 2 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 3 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 4 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 5 out of 5"></div></div>
+      <div class="devsite-rating-stars"><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 1 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 2 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 3 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 4 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 5 out of 5"></div></div>
       <div className="appo">
         {this.state.displayAppo && this.state.business[0] ? this.func() : null}</div>
     </div>)

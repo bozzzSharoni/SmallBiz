@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import axios from 'axios'
+import '../CSS/Filter.css'
+import Button from '@material-ui/core/Button'
 
 
 class Filter extends Component {
@@ -28,29 +30,32 @@ class Filter extends Component {
     const bizCategory = this.props.name
     console.log(this.state)
 
-    return <div >Filter
-            <h3>{bizCategory}</h3>
+    return <div>
+      <img id="filterImg" src="http://www.up2me.co.il/images/74638298.jpg" />
+      <h2 id="catHead" className="center-align">{bizCategory}</h2>
       <div>
-        {this.state.businessess.map(b => {
-          return <div className="row">
-            <div className="col s12 m7">
-              <div className="card medium">
-                <div className="card-image">
-                  <img src={b.img}></img>
-                  <span className="card-title">{b.name}</span>
+        <div className="row">
+          {this.state.businessess.map(b => {
+            return <div>
+              <div id="filterGrid" className="col s3">
+                <div className="flip-card">
+                  <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                      <img id="catImg" src={b.img}></img>
+                      <span id="cardTitle" className="card-title">{b.name}</span>
+                      <Button className="waves-effect waves-dark btn" href={`/SmallBizz/${b.name}`}>Assign your appointment</Button>
+                    </div>
+                    <div className="flip-card-back">
+                      <p id="catDescription"> {b.description}</p>
+                      
+                    </div>
+                  </div>
                 </div>
-                <div className="card-content">
-                  <p> {b.description}
-                  </p>
-                </div>
-                <div className="card-action">
-                  <p><Link to={`/SmallBizz/${b.name}`}>Assign your appointment</Link></p>
-                </div>
-              </div>
-            </div>
+               </div>
 
-          </div>
-        })}
+            </div>
+          })}
+        </div>
       </div>
     </div>
   }

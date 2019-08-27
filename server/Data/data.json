@@ -32,6 +32,9 @@
         "endTime": 17
     },
     {
+        "_id": {
+            "$oid": "5d641bc8571ba24cd8f8b568"
+        },
         "days": {
             "Sunday": true,
             "Tuesday": true,
