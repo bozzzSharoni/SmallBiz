@@ -93,18 +93,19 @@ class Bessiness extends Component {
       {this.state.business.map(b => {
         return <div className="details">
           <h2>{b.name}</h2>
-          <img src={b.img}></img>
+          <img src={b.img} class="busImg"></img>
           <p>{b.description}</p>
-          <p> Address : {b.city}, {b.address}</p>
-          <p> Price : {b.price} ₪ </p>
-          <ul>{b.city + " " + b.address}</ul> <br></br>
+          <p> <a> Address : </a>  {b.city}, {b.address}</p>
+          <p> <a> Price :  </a> {b.price} ₪ </p>
+
           <a onClick={this.googleMapLocation} href={`http://localhost:3000/SmallBizz/${b.name}`}
           // {`https://www.google.com/maps/place/${b.name}%E2%80%AD/@${b.location.hight},${b.location.wight},12.49z/data=!4m5!3m4!1s0x151d4ca6193b7c1f:0xc1fb72a2c0963f90!8m2!3d${b.location.hight}!4d${b.location.wight}`}
           > See Google Map Location for {b.name} </a>  <br></br><br></br>
+
           <a onClick={this.googleEarthLocation} href={`http://localhost:3000/SmallBizz/${b.name}`}
           // {`https://earth.google.com/web/search/${b.address.replace(" ","%20") + ","+ b.city.replace(" ","%20")},+%d7%99%d7%a9%d7%a8%d7%90%d7%9c/@${b.location.hight},${b.location.wight},34.10008876a,4820.53237024d,35y,0.00000001h,45.00123153t,-0r/data=CigiJgokCUxm5g1E0D9AEbOQ9uUoxT9AGfLygoz_WEFAIZR2uc0HUEFA`}      
-          > See Location for {b.name} </a> <br></br><br></br>
-  
+          > See Google Erath Location for {b.name} </a> <br></br><br></br>
+   
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a>
         </div>
 

@@ -158,7 +158,7 @@ class Home extends Component {
             <h1>Home</h1>
             <button on={this.slecetCatgory}>
                 <select class="browser-default" onClick={this.catagorySearch}>
-                    <option value="Catgory" disabled selected>Select a Category</option>
+                    <option value="Catgory" disabled selected>Search By </option>
                     <option value="name">Business Name</option>
                     <option value="rating">Rating </option>
                     {/* <option value="firstContact">First Contact</option> */}
