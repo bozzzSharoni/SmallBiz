@@ -46,7 +46,7 @@ input {
 
 .appo div{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
   grid-gap: 10px;
 }
 
@@ -61,7 +61,8 @@ input {
 
 .appo {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr; */
+  grid-template-columns: 1fr;
 }
 
 .anim{
@@ -93,3 +94,6 @@ animation-duration: 2.5s;
   width: 563px;
 }
 
+.anim div {
+  border: 1px solid black;
+}

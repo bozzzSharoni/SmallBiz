@@ -27,13 +27,13 @@ router.put('/makeapp/:bId/:uId', function (req, res) {
         let index = buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].indexOf(time)
         console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date].splice(index, 1))
         console.log(buss.availableAppointments.find(d => Object.keys(d)[0] === date)[date])
-
+buss["rating"] !== undefined ?  buss["rating"] += 10 : buss["rating"] = 10
+// buss["rating"] = 10
         // res.end()
         Business.findByIdAndUpdate({ _id: bId }, buss, function () {
             // console.log(buss, id)
             res.send('succes!')
         })
-
     })
 
     let obj = {
@@ -141,25 +141,29 @@ router.post('/addCatgories', function (req, res) {
 
 router.get('/searchByCatagory/:Catagory/:text', (req, res) => {
     // let a = req.body
-
     let Catagory = req.params.Catagory
     let text = req.params.text
+    // console.log(text,Catagory)
     if (Catagory === "rating") {
         Business.find({}, function (err, x) {
             let result = []
-            // console.log(x)
-            x.map(u => u[Catagory] < parseInt(text) ? result.push(u) : console.log(u[Catagory]))
+            x.map(u => u[Catagory] > parseInt(text) ? result.push(u) : console.log(u[Catagory]))
             console.log(result)
             res.send(result)
         })
     }
     else if (Catagory === "days") {
         Business.find({}, function (err, x) {
-            // console.log(x)
             let result = []
             for (let i of x  ){
                 let days = Object.keys(i[Catagory])
-                days.map( d => d.includes(text) || d === text ? result.push(i) : console.log(d))
+                for(let d of days ){
+                    if(d.includes(text) || d === text ){
+                        result.push(i) 
+                        break
+                    }
+                }
+                // days.forEach( d => d.includes(text) || d === text ? result.push(i)  : console.log(d))
             }
             console.log(result)
             res.send(result)
@@ -169,29 +173,20 @@ router.get('/searchByCatagory/:Catagory/:text', (req, res) => {
     else if (Catagory === "price") {
         Business.find({}, function (err, x) {
             let result = []
-            // console.log(x)
-            x.map(u => u[Catagory] > parseInt(text) ? result.push(u) : console.log(u[Catagory]))
+            x.map(u => u[Catagory] < parseInt(text) ? result.push(u) : console.log(u[Catagory]))
             console.log(result)
             res.send(result)
         })
     } else {
 
         console.log(text, Catagory)
-        // if (Catagory === "emailType") {
-        //     Business.find({ [Catagory]: text }, function (err, x) {
-        //         res.send(x)
-        //     })
-        // }
-        // else {
         Business.find({}, function (err, x) {
             let result = []
-            // console.log(x)
             x.map(u => u[Catagory].includes(text) || u[Catagory] === text ? result.push(u) : console.log(u[Catagory]))
             console.log(result)
             res.send(result)
         })
     }
-    // }
 })
 
 

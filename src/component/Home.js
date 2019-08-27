@@ -114,7 +114,7 @@ class Home extends Component {
 
     resultByCatgory = () => {
         if (this.state.resultByCatgory !== undefined) {
-            return     this.state.resultByCatgory.map(c =>
+            return this.state.resultByCatgory.map(c =>
                 <div className="category">
 
                     <div class="card">
@@ -158,7 +158,7 @@ class Home extends Component {
             <h1>Home</h1>
             <button on={this.slecetCatgory}>
                 <select class="browser-default" onClick={this.catagorySearch}>
-                    <option value="Catgory" disabled selected>Select a Category</option>
+                    <option value="Catgory" disabled selected>Search By </option>
                     <option value="name">Business Name</option>
                     <option value="rating">Rating </option>
                     {/* <option value="firstContact">First Contact</option> */}
@@ -168,14 +168,12 @@ class Home extends Component {
                     <option value="days">Days</option>
                 </select>
 
-
-
-
                 <input name="input" type="text" value={this.state.fullName} onChange={this.updateusersText} placeholder="type here" /></button>
             <div className="userDetails">
                 <h6> {this.state.loggedInUserName !== undefined ? "Welcome back " + this.state.loggedInUserName : null} </h6>
                 <img width="100" height="100" className="circle responsive-img" src={this.state.loggedInUserImg} />
             </div>
+
             <div className="categories">
                 {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
                     <div className="category">
