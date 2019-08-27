@@ -76,14 +76,17 @@ class Bessiness extends Component {
 
 
   render() {
-    const MapWrapped = withScriptjs(withGoogleMap(Maps))
+    // const MapWrapped = withScriptjs(withGoogleMap(Maps))
+    console.log(this.state.business)
     return (<div className="stores">
       {this.state.business.map(b => {
         return <div className="details">
           <h2>{b.name}</h2>
-          <img src={b.img}></img>
+          <img src={b.img} class="busImg"></img>
           <p>{b.description}</p>
-          <div id="map" style={{ width: '0vw', height: '0vh' }}>
+          <p> address : {b.address}</p>
+          <p> price : {b.price} NIS </p>
+          {/* <div id="map" style={{ width: '0vw', height: '0vh' }}> */}
             {/* <MapWrapped
               googleMapURL={
                 `https://www.google.com/maps/place/Api-Center/@47.4899796,8.2483565,12.17z/data=!4m5!3m4!1s0x0:0x9ef0cba7ea548529!8m2!3d47.5093461!4d8.1547752`
@@ -95,7 +98,7 @@ class Bessiness extends Component {
               containerElement={<div style={{ height: '100%' }} />}
               mapElement={<div style={{ height: '100%' }} />}
             /> */}
-          </div>
+          {/* </div> */}
           <a className="waves-effect waves-light btn-small" onClick={this.changeDisplay}>Make an appointment</a></div>
       })}
       <div className="appo">
