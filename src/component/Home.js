@@ -79,7 +79,7 @@ class Home extends Component {
                     ///////////////////////////////////////////////////////////////////////
                 } else { console.log("work") }
                 // console.log(typeof text, text.length)
-                text.length === 0 ? this.props.returnCatgories()  : console.log()
+                text.length === 0 ? this.props.returnCatgories() : console.log()
             }
             , function () { console.log(this.state) }
         )
@@ -156,9 +156,9 @@ class Home extends Component {
             <h1>Home</h1>
             <button on={this.slecetCatgory}>
                 <select class="browser-default" onClick={this.catagorySearch}>
-                    <option value="Catgory" disabled selected>select a Category</option>
-                    <option value="name">bussnies name</option>
-                    <option value="rating">rating </option>
+                    <option value="Catgory" disabled selected>Select a Category</option>
+                    <option value="name">Business Name</option>
+                    <option value="rating">Rating </option>
                     {/* <option value="firstContact">First Contact</option> */}
                     <option value="city">City</option>
                     {/* <option value="sold">Sold</option> */}
@@ -169,12 +169,12 @@ class Home extends Component {
 
 
 
-                <input name="input" type="text" value={this.state.input} onChange={this.updateusersText} placeholder="type here" /></button>
-            <h4> {this.state.loggedInUserName !== undefined ? "welcome back " + this.state.loggedInUserName : null} </h4>
+     <input name="input" type="text" value={this.state.input} onChange={this.updateusersText} placeholder="type here" /></button>
+            <div className="userDetails">
+                <h6> {this.state.loggedInUserName !== undefined ? "Welcome back " + this.state.loggedInUserName : null} </h6>
+                <img width="100" height="100" className="circle responsive-img" src={this.state.loggedInUserImg} />
+            </div>
 
-            
-
-            <img width="200" height="200" className="circle responsive-img" src={this.state.loggedInUserImg} />
             <div className="categories">
                 {this.props.Catgories !== undefined ? this.props.Catgories.map(c =>
                     <div className="category">
@@ -197,7 +197,7 @@ class Home extends Component {
                     // null
                 }
             </div>
-            <button className="btn waves-effect waves-light" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
+            <button className="btn waves-effect waves-light" id="logout" onClick={this.logout}>Logout<i class="material-icons right">send</i></button>
             {/* <Maps /> */}
         </div >
     }
