@@ -61,7 +61,7 @@ class Bessiness extends Component {
   func = () => {
     
     let days = this.state.business[0].availableAppointments.map(d => Object.keys(d)[0])
-    let length = days.length-1
+    let length = days.length-4
     days = days.slice(1, length)
     console.log(days)
     return <div className="anim">

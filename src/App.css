@@ -63,6 +63,7 @@ input {
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
+
 .anim{
 animation-name: show;
 animation-duration: 2.5s;
@@ -91,3 +92,4 @@ animation-duration: 2.5s;
   height: 295px;
   width: 563px;
 }
+
