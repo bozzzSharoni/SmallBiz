@@ -4,6 +4,7 @@ import { googleMap, withScriptjs, withGoogleMap, GoogleMap } from 'react-google-
 import moment from 'moment'
 import alertify from 'alertify.js'
 import Maps from './Maps';
+import Calendar from './Calnder';
 require('dotenv').config()
 
 const API_KEY = process.env.API_KEY
@@ -35,9 +36,10 @@ class Bessiness extends Component {
     this.setState({ displayAppo: !this.state.displayAppo })
   }
 
-  makeAnAppointment = async (e) => {
-    let time = e.target.value
-    let date = e.target.name
+ 
+  makeAnAppointment = async (x,y) => {
+    let time = y
+    let date = x
     let appointmentComfirm = this.state.business[0].appointmentComfirm
     let object = { date: date, time: time, appointmentComfirm: appointmentComfirm }
     await axios.put(`http://localhost:8000/makeapp/${this.state.business[0]._id}/${this.props.state.user.uid}`, object)
@@ -65,6 +67,7 @@ class Bessiness extends Component {
     days = days.slice(1, length)
     console.log(days)
     return <div className="anim">
+     
       {days.map(d => <div className={d} >
         <h6>{d} {moment(d).format('dddd')} </h6>
 
@@ -111,9 +114,11 @@ class Bessiness extends Component {
 
         {/* </div> */ }
       })}
-      <div class="devsite-rating-stars"><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 1 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 2 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 3 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 4 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 5 out of 5"></div></div>
+      {/* <div class="devsite-rating-stars"><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 1 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 2 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 3 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 4 out of 5"></div><div class="devsite-rating-star gc-analytics-event material-icons devsite-rating-star-outline" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="Site content star ratings, rating 5 out of 5"></div></div> */}
+      {/* <div>sjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjs</div> */}
+      {/* <div>ss</div> */}
       <div className="appo">
-        {this.state.displayAppo && this.state.business[0] ? this.func() : null}</div>
+        {this.state.displayAppo && this.state.business[0] ? <Calendar state={this.state} makeAnAppointment={this.makeAnAppointment} /> : null}</div>
     </div>)
   }
 }

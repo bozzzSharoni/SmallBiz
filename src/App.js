@@ -12,6 +12,7 @@ import Bessiness from './component/Bessiness';
 import OpenBisnnes from './component/OpenBisnnes';
 import User from './component/User'
 import { async } from 'q';
+import Tset from './component/Calnder';
 
 
 class App extends Component {
@@ -195,6 +196,7 @@ class App extends Component {
 
               {/* <li ><Link to="/SingUp">singup  </Link></li> */}
               <li ><Link to="/" >Home</Link></li>
+              {/* <li ><Link to="/Test" >Mor Test</Link></li> */}
               <li ><Link to="/About">About </Link></li>
             </ul>
           </div>
@@ -210,8 +212,8 @@ class App extends Component {
         <Route path="/Filter/:CatgoryName" exact render={({ match }) => <Filter name={match.params.CatgoryName} />} />
         <Route path="/SmallBizz/:BesniessName" exact render={({ match }) => <Bessiness state={this.state} name={match.params.BesniessName} />} />
         <Route path="/Signup" exact render={() => this.state.user ? <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <SignUp handle={this.handleChange} state={this.state} saveUser={this.saveNewUserToDb} getName={this.getName} handleImg={this.handleImage} upload={this.handleUpload} />} />
-
         <Route path="/OpenBisnnes" render={() => this.state.user ? <Home returnCatgories={this.returnCatgories} reaseCatgories={this.reaseCatgories} state={this.state} Catgories={this.state.Catgories} userEmail={this.state.userEmail} /> : <OpenBisnnes Catgories={this.state.Catgories} saveNew={this.saveNewBiz} state={this.state} handleImg={this.handleImage} upload={this.handleUpload} />} />
+    {/* <Route path="/Test" render={() => <Tset />}  /> */}
       </Router >
 
     );
