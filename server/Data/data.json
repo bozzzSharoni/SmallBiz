@@ -19,8 +19,8 @@
         "owner": "Mor Bargig",
         "payment": "bmhb",
         "country": "israel",
-        "city": "Ashdod",
-        "address": "mosav setulim ahela street ",
+        "city": "Tel Aviv",
+        "address": " Elevation Academy",
         "service": "sex service",
         "price": 100,
         "averageAppointmentTime": 30,
@@ -32,9 +32,7 @@
         "endTime": 17
     },
     {
-        "_id": {
-            "$oid": "5d641bc8571ba24cd8f8b568"
-        },
+   
         "days": {
             "Sunday": true,
             "Tuesday": true,
@@ -51,8 +49,8 @@
         "description": "barbershop we are located in moshav shtulim",
         "owner": "Dor Ahrak",
         "country": "Isael",
-        "city": "Ashdod",
-        "address": "moshav Shtulim rhasonim steert",
+        "city": "Moshav Shtulim",
+        "address": " Haela steert",
         "service": "haircut",
         "price": 100,
         "averageAppointmentTime": 30,
@@ -67,9 +65,7 @@
         "rating": 10
     },
     {
-        "_id": {
-            "$oid": "5d641bc4e1c3bf59d85f6f3f"
-        },
+
         "days": {
             "Sunday": true,
             "Monday": true,

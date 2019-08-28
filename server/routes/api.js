@@ -72,6 +72,7 @@ newDay = () => {
             !daysOfWork.find(d => d === x) ? newDayNumber += 1 : null
             // console.log(newDayNumber)
             i.availableAppointments.push({ [moment().add(newDayNumber, 'day').format('L')]: regularDay })
+            i.availableAppointments.splice(1,1)
             // console.log(i.availableAppointments)
             let id = i._id
             Business.findByIdAndUpdate({ _id: id }, i, function () {
@@ -79,6 +80,8 @@ newDay = () => {
         }
     })
 }
+
+
 
 // newDay()
 
@@ -247,6 +250,16 @@ router.post('/addnewappointment', function (req, res) {
 
 
 
+
+router.get('/Besniss', (req, res) => {
+ Business.find({}).exec(function (err, Besniss) {
+
+
+        res.send(Besniss)
+    })
+})
+
+
 router.get('/getuser/:email', (req, res) => {
     let key = Object.keys(req.params)[0]
     let value = req.params[key]
@@ -310,6 +323,7 @@ router.post('/sendEmail', (req, res) => {
 //         let daysOfWork = Object.keys(b1.days)
 //         console.log(daysOfWork)
 //         let arr = []
+//         arr.push({ "regularDay": dailySchedule })
 //         let x = 0
 //         for (let i = 0; x < 10; i++) {
 //             console.log(moment((moment().add(x + i, 'day').format('L'))).format('dddd'))
@@ -319,7 +333,6 @@ router.post('/sendEmail', (req, res) => {
 //                 x++
 //             }
 //         }
-//         arr.push({ "regularDay": dailySchedule })
 //         b1.availableAppointments = arr
 //         b1.save()
 //     }
